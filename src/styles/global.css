@@ -9,6 +9,7 @@
 
 body, div#root {
   min-height: 100vh;
+  background-color: aliceblue;
 }
 div#root {
   display: flex;
