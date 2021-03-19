@@ -1,12 +1,15 @@
+import { CSSProperties } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { BiRocket } from 'react-icons/bi';
+import { useHistory } from 'react-router-dom';
 
 import '../styles/pages/Home.css';
-import { CSSProperties } from 'react';
 
 function Home() {
-  function handleOpenNewProjectModal() {
+  const history = useHistory();
 
+  function handleNavigateToCreateNewProject() {
+    history.push('/create');
   }
 
   return (
@@ -21,8 +24,8 @@ function Home() {
             <div
               className="projectItem"
               style={{ '--active-color': '#359756' } as CSSProperties}
-              onClick={handleOpenNewProjectModal}
-              onKeyDown={handleOpenNewProjectModal}
+              onClick={handleNavigateToCreateNewProject}
+              onKeyDown={handleNavigateToCreateNewProject}
               role="button"
               tabIndex={0}
             >
