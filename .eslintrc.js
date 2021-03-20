@@ -24,6 +24,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.js', '.jsx'] }],
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/button-has-type': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -36,6 +37,16 @@ module.exports = {
     ],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'jsx-a11y/label-has-associated-control': ['error', {
+      required: {
+        some: ['nesting', 'id'],
+      },
+    }],
+    'jsx-a11y/label-has-for': ['error', {
+      required: {
+        some: ['nesting', 'id'],
+      },
+    }],
   },
   settings: {
     'import/resolver': {

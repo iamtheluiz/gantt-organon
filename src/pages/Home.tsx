@@ -13,7 +13,7 @@ function Home() {
   }
 
   return (
-    <section id="home">
+    <section id="home" className="container">
       <header>
         <h1>Gantt Organon</h1>
         <span>Project Schedule in WEB</span>

@@ -1,13 +1,3 @@
-section#home {
-  display: 'flex';
-  justify-content: 'center';
-  flex-direction: 'column';
-  align-items: 'center';
-
-  width: 100%;
-  max-width: 520px;
-  padding: 16px;
-}
 section#home > header {
   display: flex;
   justify-content: center;
