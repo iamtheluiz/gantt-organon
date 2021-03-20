@@ -80,17 +80,3 @@ section#create footer {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
-
-section#create button {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  background-color: #a143b4;
-  color: white;
-  font-size: 1rem;
-  transition: all 0.2s;
-}
-
-section#create button:hover {
-  filter: brightness(0.8);
-}

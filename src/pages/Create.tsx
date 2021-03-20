@@ -34,8 +34,14 @@ function Create() {
             </div>
           </div>
           <footer>
-            <button type="reset" style={{ backgroundColor: '#dde9f3', color: '#666' }}>Clear</button>
-            <button type="submit">Create</button>
+            <button
+              className="button"
+              type="reset"
+              style={{ backgroundColor: '#dde9f3', color: '#666' }}
+            >
+              Clear
+            </button>
+            <button className="button" type="submit">Create</button>
           </footer>
         </form>
       </section>
