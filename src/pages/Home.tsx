@@ -1,7 +1,8 @@
-import { CSSProperties } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 import { BiRocket } from 'react-icons/bi';
-import { useHistory } from 'react-router-dom';
+
+import ProjectItem from '../components/ProjectItem';
 
 import '../styles/pages/Home.css';
 
@@ -25,36 +26,23 @@ function Home() {
       <div className="content">
         <ul>
           <li>
-            <div
-              className="projectItem"
-              style={{ '--active-color': '#359756' } as CSSProperties}
-              onClick={handleNavigateToCreateNewProject}
-              onKeyDown={handleNavigateToCreateNewProject}
-              role="button"
-              tabIndex={0}
+            <ProjectItem
+              handleUserClick={handleNavigateToCreateNewProject}
+              title="Create Project"
+              subtitle="New project schedule"
+              color="#359756"
             >
-              <div className="iconContainer">
-                <FiPlus />
-              </div>
-              <strong>Create Project</strong>
-              <span>New project schedule</span>
-            </div>
+              <FiPlus />
+            </ProjectItem>
           </li>
           <li>
-            <div
-              className="projectItem"
-              style={{ '--active-color': '#843794' } as CSSProperties}
-              onClick={handleNavigateToProject}
-              onKeyDown={handleNavigateToProject}
-              role="button"
-              tabIndex={0}
+            <ProjectItem
+              handleUserClick={handleNavigateToProject}
+              title="Rocket"
+              subtitle="Send rockets to mars!"
             >
-              <div className="iconContainer">
-                <BiRocket />
-              </div>
-              <strong>Rocket Project</strong>
-              <span>Launched rockets</span>
-            </div>
+              <BiRocket />
+            </ProjectItem>
           </li>
         </ul>
       </div>
