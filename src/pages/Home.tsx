@@ -12,6 +12,10 @@ function Home() {
     history.push('/create');
   }
 
+  function handleNavigateToProject() {
+    history.push('/project/1');
+  }
+
   return (
     <section id="home" className="container">
       <header>
@@ -37,7 +41,14 @@ function Home() {
             </div>
           </li>
           <li>
-            <div className="projectItem" style={{ '--active-color': '#843794' } as CSSProperties}>
+            <div
+              className="projectItem"
+              style={{ '--active-color': '#843794' } as CSSProperties}
+              onClick={handleNavigateToProject}
+              onKeyDown={handleNavigateToProject}
+              role="button"
+              tabIndex={0}
+            >
               <div className="iconContainer">
                 <BiRocket />
               </div>
