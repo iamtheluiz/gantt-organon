@@ -5,6 +5,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       sans: 'Roboto, sans-serif',
+      serif: 'Merriweather, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
     },
   },
   variants: {
