@@ -53,6 +53,10 @@ a {
 }
 
 button.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 100%;
   padding: 12px;
   border-radius: 8px;

@@ -10,7 +10,7 @@ section#project {
   animation-iteration-count: 1;
 }
 
-section#project header {
+section#project > header {
   display: flex;
   align-items: center;
   padding: 16px;
@@ -19,21 +19,21 @@ section#project header {
   box-shadow: #ccc 2px 4px 4px;
 }
 
-section#project header a {
+section#project > header a {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-section#project header a svg {
+section#project > header a svg {
   transition: all 0.2s;
 }
 
-section#project header a:hover svg {
+section#project > header a:hover svg {
   color: #a143b4 !important;
   transform: scale(1.2);
 }
-section#project header div#logo {
+section#project > header div#logo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,12 +44,24 @@ section#project header div#logo {
   background-color: #a143b4;
   margin-left: 16px;
 }
-section#project header div.details {
+section#project > header div.details {
   margin-left: 8px;
 }
-section#project header div.details h1 {
+section#project > header div.details h1 {
   font: 900 1.2rem 'Merriweather', serif;
 }
-section#project header div.details span {
+section#project > header div.details span {
   font-size: 1rem;
+}
+
+section#project main {
+  padding: 16px;
+}
+section#project main header {
+  display: flex;
+  flex-direction: row-reverse;
+}
+section#project main header button {
+  max-width: 160px;
+  font-size: 0.9rem;
 }

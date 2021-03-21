@@ -1,4 +1,4 @@
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiPlus } from 'react-icons/fi';
 import { BiRocket } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +19,14 @@ function Project() {
           <span>Project subtitle</span>
         </div>
       </header>
-      <main />
+      <main>
+        <header>
+          <button className="button">
+            <FiPlus color="#fff" size={18} />
+            Add Task
+          </button>
+        </header>
+      </main>
     </section>
   );
 }
