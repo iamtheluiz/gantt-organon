@@ -4,34 +4,8 @@
 }
 
 div.background {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
   animation: fade 0.2s infinite;
   animation-iteration-count: 1;
-}
-
-section#create {
-  padding: 0px;
-  border-radius: 8px;
-}
-
-section#create header {
-  display: flex;
-  align-items: center;
-  padding: 16px 16px;
-  border-radius: 8px 8px 0px 0px;
-}
-
-section#create header a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 section#create header a svg {
@@ -43,40 +17,7 @@ section#create header a:hover svg {
   transform: scale(1.2);
 }
 
-section#create div.content {
-  padding: 16px 16px;
-}
-
-section#create div.content h1 {
-  font-weight: 400;
-  font-size: 2rem;
-  padding: 16px 0px;
-}
-
-section#create div.input-field {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 0px;
-}
-
-section#create div.input-field label {
-  padding-bottom: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #181818;
-}
-
 section#create div.input-field input {
-  border-bottom: 2px solid #757575;
   border-radius: 8px 8px 0px 0px;
-  font-size: 1rem;
-  padding: 0.8rem 0.6rem;
   background-color: #dde9f3;
-}
-
-section#create footer {
-  padding: 16px 16px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
 }
