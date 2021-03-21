@@ -13,18 +13,18 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
   handleUserClick, color = '#843794', title, subtitle, children,
 }) => (
   <div
-    className="projectItem"
+    className="projectItem flex flex-col items-center rounded-lg cursor-pointer transition-all duration-200 p-4"
     style={{ '--active-color': color } as CSSProperties}
     onClick={handleUserClick}
     onKeyDown={handleUserClick}
     role="button"
     tabIndex={0}
   >
-    <div className="iconContainer">
+    <div className="iconContainer relative w-full h-0 rounded-2xl border-4 border-dashed border-gray-700 mb-1 transition-all duration-200">
       {children}
     </div>
-    <strong>{title}</strong>
-    <span>{subtitle}</span>
+    <strong className="text-base text-gray-700">{title}</strong>
+    <span className="text-base font-light text-center">{subtitle}</span>
   </div>
 );
 

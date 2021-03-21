@@ -18,13 +18,13 @@ function Home() {
   }
 
   return (
-    <section id="home" className="container">
-      <header>
-        <h1>Gantt Organon</h1>
-        <span>Project Schedule in WEB</span>
+    <section id="home" className="flex justify-center items-center flex-col w-full max-w-xl p-4">
+      <header className="text-center w-full">
+        <h1 className="text-4xl font-bold text-gray-800">Gantt Organon</h1>
+        <span className="text-lg font-light text-gray-600">Project Schedule in WEB</span>
       </header>
-      <div className="content">
-        <ul>
+      <div className="w-full mt-8 overflow-y-auto max-h-96">
+        <ul className="grid grid-cols-3 list-none gap-2">
           <li>
             <ProjectItem
               handleUserClick={handleNavigateToCreateNewProject}

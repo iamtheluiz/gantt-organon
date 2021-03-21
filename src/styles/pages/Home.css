@@ -1,51 +1,8 @@
-section#home > header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  padding: 8px 0px;
-  margin-bottom: 20px;
-}
 section#home > header h1 {
   font: 900 2.4rem 'Merriweather', serif;
 }
-section#home > header span {
-  color: #696969;
-}
-section#home div.content {
-  max-height: 520px;
-  padding: 16px;
-  overflow-y: auto;
-}
-section#home div.content ul {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2rem;
-}
-section#home div.projectItem {
-  --active-color: #3ba2b4;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s;
-  padding: 0.4rem;
-  outline-color: var(--active-color);
-  outline-style: 3px solid;
-}
 section#home div.projectItem .iconContainer {
-  position: relative;
-  width: 100%;
-  height: 0;
   padding-bottom: 100%;
-  border-radius: 16px;
-  border: 3px dashed #696969;
-  margin-bottom: 4px;
-  transition: all 0.2s;
 }
 section#home div.projectItem .iconContainer svg {
   --svg-width: 40px;
@@ -56,21 +13,9 @@ section#home div.projectItem .iconContainer svg {
 
   width: var(--svg-width);
   height: var(--svg-width);
-  color: #575757 !important;
+  color: #374151 !important;
 
   transition: all 0.2s;
-}
-section#home div.projectItem strong,
-section#home div.projectItem span {
-  margin-top: 4px;
-  transition: all 0.2s;
-}
-section#home div.projectItem strong {
-  font-size: 1rem;
-}
-section#home div.projectItem span {
-  font-weight: 300;
-  font-size: 0.8rem;
 }
 
 section#home div.projectItem:hover {
@@ -85,14 +30,4 @@ section#home div.projectItem:hover .iconContainer svg {
 section#home div.projectItem:hover strong,
 section#home div.projectItem:hover span {
   color: var(--active-color) !important;
-}
-
-@media(max-width: 400px) {
-  section#home {
-    padding: 32px;
-  }
-  section#home ul {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
 }
