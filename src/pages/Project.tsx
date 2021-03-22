@@ -5,6 +5,7 @@ import TaskInfo, { Task } from '../components/TaskInfo';
 
 import '../styles/pages/Project.css';
 import Header from '../components/Header';
+import TaskItem from '../components/TaskItem';
 
 function Project() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -83,12 +84,7 @@ function Project() {
             </header>
             <div className="flex-1 px-4">
               {tasks.map((task) => (
-                <div key={task.name} className="flex flex-row items-center text-lef h-14" style={{ width: '28rem' }}>
-                  <div className="w-full flex flex-col py-2 px-3 rounded-md" style={{ backgroundColor: task.color }}>
-                    <strong className="text-sm">{task.name}</strong>
-                    <span className="text-xs">{`${task.start} - ${task.end}`}</span>
-                  </div>
-                </div>
+                <TaskItem task={task} />
               ))}
             </div>
           </div>
