@@ -52,11 +52,11 @@ function Project() {
               className="button max-w-max flex justify-center items-center shadow-md"
             >
               <FiDownload color="#fff" size={18} />
-              <span className="text-sm ml-1">Export</span>
+              <span className="text-sm ml-1 text-white">Export</span>
             </button>
             <button className="button max-w-max flex justify-center items-center shadow-md">
               <FiPlus color="#fff" size={18} />
-              <span className="text-sm ml-1">Add Task</span>
+              <span className="text-sm ml-1 text-white">Add Task</span>
             </button>
           </div>
         </header>
