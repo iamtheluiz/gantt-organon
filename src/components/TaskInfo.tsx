@@ -6,8 +6,8 @@ import '../styles/pages/Home.css';
 export interface Task {
   name: string;
   color: string;
-  start: string;
-  end: string;
+  start: Date;
+  end: Date;
 }
 
 interface TaskInfoProps {

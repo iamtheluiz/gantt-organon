@@ -9,36 +9,75 @@ import TaskItem from '../components/TaskItem';
 
 function Project() {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const months = ['Jan/21', 'Fev/21', 'Mar/21', 'Abr/21', 'Mai/21'];
+  const [months, setMonths] = useState<{ display: string, dayCount: number}[]>([]);
+  const daySize = 0.5;
+  const [firstMonth, setFirstMonth] = useState<Date | null>(null);
 
   useEffect(() => {
     setTasks([
       {
         name: 'Planning',
         color: '#f98e72',
-        start: '01/03/2021',
-        end: '01/05/2021',
+        start: new Date(2021, 1, 1),
+        end: new Date(2021, 2, 15),
       },
       {
         name: 'Development',
         color: '#79d5f8',
-        start: '01/03/2021',
-        end: '01/05/2021',
+        start: new Date(2021, 2, 1),
+        end: new Date(2021, 3, 15),
       },
       {
         name: 'Deploy',
         color: '#4398b9',
-        start: '01/04/2021',
-        end: '01/05/2021',
+        start: new Date(2021, 2, 15),
+        end: new Date(2021, 3, 15),
       },
       {
         name: 'Tests',
         color: '#3ea776',
-        start: '01/04/2021',
-        end: '01/05/2021',
+        start: new Date(2021, 3, 1),
+        end: new Date(2021, 4, 30),
       },
     ]);
   }, []);
+
+  useEffect(() => {
+    if (tasks.length > 0) {
+      // On tasks change, reload month list
+      // Get first day of the first month
+      let firstMonthValue: Date = null as unknown as Date;
+      let lastMonthValue: Date = null as unknown as Date;
+
+      tasks.forEach((task) => {
+        if (firstMonthValue === null || task.start.getTime() < firstMonthValue.getTime()) {
+          firstMonthValue = new Date(task.start);
+        }
+        if (lastMonthValue === null || task.end.getTime() > lastMonthValue.getTime()) {
+          lastMonthValue = new Date(task.end);
+        }
+      });
+
+      // Set first day
+      firstMonthValue.setDate(1);
+      lastMonthValue.setDate(1);
+
+      setFirstMonth(new Date(firstMonthValue));
+
+      // Get month list
+      const monthList: { display: string, dayCount: number }[] = [];
+      while (firstMonthValue <= lastMonthValue) {
+        monthList.push({
+          display: `${firstMonthValue.getMonth() + 1}/${firstMonthValue.getFullYear()}`,
+          dayCount: new Date(firstMonthValue.getFullYear(), firstMonthValue.getMonth() + 1, 0).getDate(),
+        });
+
+        // Add one month
+        firstMonthValue = new Date(firstMonthValue.setMonth(firstMonthValue.getMonth() + 1));
+      }
+      setMonths(monthList);
+    }
+  }, [tasks]);
 
   return (
     <section id="project" className="w-full min-h-screen dark:bg-black">
@@ -73,20 +112,24 @@ function Project() {
           </aside>
 
           <div className="flex flex-col overflow-x-auto w-full">
-            <header className="flex flex-row w-max items-center h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
-              {months.map((month) => (
-                <div key={month} className="flex flex-col" style={{ minWidth: '14rem' }}>
-                  <div className="flex items-center text-left w-full">
-                    <strong className="flex-1 text-gray-400">{month}</strong>
-                  </div>
+            {months !== null && (
+              <>
+                <header className="flex flex-row w-max items-center h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
+                  {months.map((month) => (
+                    <div key={month.display} className="flex flex-col" style={{ minWidth: `${daySize * 30}rem` }}>
+                      <div className="flex items-center text-left w-full">
+                        <strong className="flex-1 text-gray-400">{month.display}</strong>
+                      </div>
+                    </div>
+                  ))}
+                </header>
+                <div className="flex-1 px-4">
+                  {tasks.map((task) => (
+                    <TaskItem key={task.name} task={task} daySize={daySize} firstTimelineDay={firstMonth} />
+                  ))}
                 </div>
-              ))}
-            </header>
-            <div className="flex-1 px-4">
-              {tasks.map((task) => (
-                <TaskItem key={task.name} task={task} />
-              ))}
-            </div>
+              </>
+            )}
           </div>
         </div>
       </main>
