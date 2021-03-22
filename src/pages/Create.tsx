@@ -14,7 +14,7 @@ function Create() {
   }
 
   return (
-    <div className="background absolute flex justify-center items-center w-full h-full min-h-full">
+    <div className="background absolute dark:bg-black flex justify-center items-center w-full h-full min-h-full">
       <section id="create" className="max-w-lg w-full px-4">
         <header className="w-full py-4 rounded-lg">
           <Link to="/" className="linkHover w-7 flex justify-center items-center">

@@ -13,7 +13,6 @@ section#home div.projectItem .iconContainer svg {
 
   width: var(--svg-width);
   height: var(--svg-width);
-  color: #374151 !important;
 
   transition: all 0.2s;
 }
