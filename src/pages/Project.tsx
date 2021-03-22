@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FiArrowLeft, FiDownload, FiPlus } from 'react-icons/fi';
+import { FiDownload, FiPlus } from 'react-icons/fi';
 import { BiRocket } from 'react-icons/bi';
 import TaskInfo, { Task } from '../components/TaskInfo';
 
 import '../styles/pages/Project.css';
+import Header from '../components/Header';
 
 function Project() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -41,18 +41,9 @@ function Project() {
 
   return (
     <section id="project" className="w-full min-h-screen">
-      <header className="flex items-center p-4 bg-white shadow-md">
-        <Link to="/" className="w-7 flex justify-center items-center">
-          <FiArrowLeft className="w-full h-full text-gray-700" />
-        </Link>
-        <div id="logo" className="flex justify-center items-center h-10 w-10 ml-4 rounded-md">
-          <BiRocket size={28} color="#FFF" />
-        </div>
-        <div className="ml-2 flex flex-col justify-center">
-          <h1 className="font-serif text-base">Gantt Organon</h1>
-          <span className="text-sm font-light">Project subtitle</span>
-        </div>
-      </header>
+      <Header title="Rocket" subtitle="Send rockets to mars!" backTo="/">
+        <BiRocket size={28} color="#FFF" />
+      </Header>
       <main className="p-4">
         <header className="flex flex-row-reverse">
           <div className="flex flex-row gap-2">
