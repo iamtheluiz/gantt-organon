@@ -1,0 +1,23 @@
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+div.background {
+  animation: fade 0.2s infinite;
+  animation-iteration-count: 1;
+}
+
+section#create header a svg {
+  transition: all 0.2s;
+}
+
+section#create header a:hover svg {
+  color: #a143b4 !important;
+  transform: scale(1.2);
+}
+
+section#create div.input-field input {
+  border-radius: 8px 8px 0px 0px;
+  background-color: #dde9f3;
+}

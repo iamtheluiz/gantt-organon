@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,900&family=Roboto:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, div#root {
+  min-height: 100vh;
+  background-color: aliceblue;
+}
+div#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #a143b4;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+button.button:hover {
+  filter: brightness(0.8);
+}
+
+.linkHover svg {
+  transition: all 0.2s;
+}
+.linkHover:hover svg {
+  color: #a143b4 !important;
+  transform: scale(1.2);
+}
