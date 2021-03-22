@@ -22,3 +22,6 @@ section#project > header a:hover svg {
 section#project > header div#logo {
   background-color: #a143b4;
 }
+section#project aside.taskList table tbody tr:last-child {
+  border-radius: 2px 0px 0px 2px;
+}

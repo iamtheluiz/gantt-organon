@@ -26,6 +26,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/button-has-type': 'off',
     'react/prop-types': 'off',
+    'max-len': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
