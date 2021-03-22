@@ -11,14 +11,6 @@ section#project > header {
   border-radius: 8px 8px 0px 0px;
 }
 
-section#project > header a svg {
-  transition: all 0.2s;
-}
-
-section#project > header a:hover svg {
-  color: #a143b4 !important;
-  transform: scale(1.2);
-}
 section#project > header div#logo {
   background-color: #a143b4;
 }

@@ -27,3 +27,11 @@ button.button {
   font-size: 1rem;
   transition: all 0.2s;
 }
+
+.linkHover svg {
+  transition: all 0.2s;
+}
+.linkHover:hover svg {
+  color: #a143b4 !important;
+  transform: scale(1.2);
+}

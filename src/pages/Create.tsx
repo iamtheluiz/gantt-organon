@@ -17,7 +17,7 @@ function Create() {
     <div className="background absolute flex justify-center items-center w-full h-full min-h-full">
       <section id="create" className="max-w-lg w-full px-4">
         <header className="w-full py-4 rounded-lg">
-          <Link to="/" className="w-7 flex justify-center items-center">
+          <Link to="/" className="linkHover w-7 flex justify-center items-center">
             <FiArrowLeft className="w-full h-full text-gray-700" />
           </Link>
         </header>
