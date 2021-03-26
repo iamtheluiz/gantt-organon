@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Task } from './TaskInfo';
+import { Task } from '../context/task';
 
 interface TaskItemProps {
   task: Task;
@@ -35,8 +35,8 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, daySize, firstTimelineDay }) 
       style={{ width: `${width}rem`, marginLeft: `${offset}rem` }}
     >
       <div className="w-full flex flex-col py-2 px-3 rounded-md" style={{ backgroundColor: task.color }}>
-        <strong className="text-sm">{task.name}</strong>
-        <span className="text-xs">{`${task.start.toLocaleDateString()} - ${task.end.toLocaleDateString()}`}</span>
+        <strong className="text-sm text-gray-800">{task.name}</strong>
+        <span className="text-xs text-gray-700">{`${task.start.toLocaleDateString()} - ${task.end.toLocaleDateString()}`}</span>
       </div>
     </div>
   );

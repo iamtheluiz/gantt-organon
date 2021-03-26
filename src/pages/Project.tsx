@@ -1,46 +1,20 @@
 import { useEffect, useState } from 'react';
 import { FiDownload, FiPlus } from 'react-icons/fi';
 import { BiRocket } from 'react-icons/bi';
-import TaskInfo, { Task } from '../components/TaskInfo';
 
-import '../styles/pages/Project.css';
+import { useTask } from '../context/task';
+
 import Header from '../components/Header';
 import TaskItem from '../components/TaskItem';
+import TaskInfo from '../components/TaskInfo';
+
+import '../styles/pages/Project.css';
 
 function Project() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const { tasks } = useTask();
   const [months, setMonths] = useState<{ display: string, dayCount: number}[]>([]);
   const daySize = 0.5;
   const [firstMonth, setFirstMonth] = useState<Date | null>(null);
-
-  useEffect(() => {
-    setTasks([
-      {
-        name: 'Planning',
-        color: '#f98e72',
-        start: new Date(2021, 1, 1),
-        end: new Date(2021, 2, 15),
-      },
-      {
-        name: 'Development',
-        color: '#79d5f8',
-        start: new Date(2021, 2, 1),
-        end: new Date(2021, 3, 15),
-      },
-      {
-        name: 'Deploy',
-        color: '#4398b9',
-        start: new Date(2021, 2, 15),
-        end: new Date(2021, 3, 15),
-      },
-      {
-        name: 'Tests',
-        color: '#3ea776',
-        start: new Date(2021, 3, 1),
-        end: new Date(2021, 4, 30),
-      },
-    ]);
-  }, []);
 
   useEffect(() => {
     if (tasks.length > 0) {
@@ -101,9 +75,9 @@ function Project() {
         </header>
 
         <div className="flex flex-row mt-4 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
-          <aside className="taskList max-w-md w-full border-r-2 border-gray-200 dark:border-gray-700">
+          <aside className="taskList max-w-min sm:max-w-md w-full border-r-2 border-gray-200 dark:border-gray-700">
             <div className="flex items-center text-left w-full h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
-              <strong className="flex-1 text-gray-400">Task name</strong>
+              <strong className="flex-1 text-gray-400 hidden sm:inline">Task name</strong>
               <strong className="w-24 text-gray-400">Progress</strong>
             </div>
             {tasks.map((task) => (
