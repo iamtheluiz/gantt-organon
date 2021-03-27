@@ -9,7 +9,7 @@ import '../styles/pages/Project.css';
 function TaskTimeline() {
   const { tasks } = useTask();
   const [months, setMonths] = useState<{ display: string, dayCount: number}[]>([]);
-  const daySize = 0.5;
+  const daySize = 0.6;
   const [firstMonth, setFirstMonth] = useState<Date | null>(null);
 
   useEffect(() => {

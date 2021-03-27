@@ -10,19 +10,19 @@ interface TaskItemProps {
 const TaskItem: React.FC<TaskItemProps> = ({ task, daySize, firstTimelineDay }) => {
   const [width, setWidth] = useState(0);
   const [offset, setOffset] = useState(0);
-  const milisecondsInOneDay = 24 * 60 * 60 * 1000;
+  const millisecondsInOneDay = 24 * 60 * 60 * 1000;
 
   useEffect(() => {
     // Get day count
-    const dayCount: number = (task.end.getTime() - task.start.getTime()) / milisecondsInOneDay;
+    const dayCount: number = (task.end.getTime() - task.start.getTime()) / millisecondsInOneDay;
 
     setWidth(dayCount * daySize);
-  }, [task]);
+  }, [task, daySize]);
 
   useEffect(() => {
     // Offset
     if (firstTimelineDay !== null) {
-      const dayCount: number = (task.start.getTime() - firstTimelineDay.getTime()) / milisecondsInOneDay;
+      const dayCount: number = (task.start.getTime() - firstTimelineDay.getTime()) / millisecondsInOneDay;
 
       setOffset(dayCount * daySize);
     }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { FiCode } from 'react-icons/fi';
 import { Task } from '../context/task';
 
 import '../styles/pages/Home.css';
@@ -14,7 +13,6 @@ export const TaskInfo: React.FC<TaskInfoProps> = ({ task }) => (
     style={{ borderColor: task.color }}
   >
     <div className="flex flex-row items-center flex-1">
-      <FiCode className="w-7 h-full hidden sm:inline" color={task.color} />
       <strong className="text-base text-gray-600 dark:text-gray-300 ml-1 sm:inline hidden">{task.name}</strong>
     </div>
     <div className="flex flex-row items-center w-24">

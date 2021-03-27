@@ -28,6 +28,7 @@ module.exports = {
     'react/prop-types': 'off',
     'max-len': 'off',
     'linebreak-style': 'off',
+    'no-plusplus': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
