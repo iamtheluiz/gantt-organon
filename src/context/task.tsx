@@ -39,7 +39,7 @@ function useTask(): TaskContextProps {
   const context = useContext(TaskContext);
 
   if (!context) {
-    throw new Error('useHorse must be used within a HorseProvider');
+    throw new Error('useTask must be used within a TaskProvider');
   }
 
   return context;

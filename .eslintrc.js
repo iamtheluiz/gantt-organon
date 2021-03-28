@@ -29,6 +29,7 @@ module.exports = {
     'max-len': 'off',
     'linebreak-style': 'off',
     'no-plusplus': 'off',
+    'no-param-reassign': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

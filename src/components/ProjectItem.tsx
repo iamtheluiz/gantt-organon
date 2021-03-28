@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 
-import '../styles/pages/Home.css';
+import '../styles/components/ProjectItem.css';
 
 interface ProjectItemProps {
   handleUserClick: () => void;

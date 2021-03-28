@@ -1,16 +1,43 @@
 import { FormEvent } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
+import { useDatabase } from '../context/database';
+import ProjectModel from '../model/Project';
 
 import '../styles/pages/Create.css';
 
 function Create() {
   const history = useHistory();
+  const { database } = useDatabase();
 
-  function handleFormSubmit(event: FormEvent) {
+  async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    history.push('/project/1');
+    const form = event.currentTarget;
+    const formData: Record<string, string> = {};
+    const formInputs = form.getElementsByTagName('input');
+
+    for (let inputIndex = 0; inputIndex < formInputs.length; inputIndex++) {
+      const input = formInputs[inputIndex];
+      const inputName = input.getAttribute('name');
+
+      if (inputName !== null) {
+        formData[inputName] = input.value;
+      }
+    }
+
+    const projectsCollection = database.collections.get<ProjectModel>('projects');
+
+    await database.action(async () => {
+      await projectsCollection.create((project) => {
+        project.title = formData.title;
+        project.subtitle = formData.subtitle;
+        project.emoji = '🚀';
+      });
+    });
+
+    form.reset();
+    history.push('/');
   }
 
   return (
@@ -30,6 +57,7 @@ function Create() {
                 className="placeholder-gray-400 border-gray-500 border-b-2 text-base px-2.5 py-3.5"
                 type="text"
                 id="title"
+                name="title"
                 placeholder="Ex: Rocket"
               />
             </div>
@@ -38,7 +66,8 @@ function Create() {
               <input
                 className="placeholder-gray-400 border-gray-500 border-b-2 text-base px-2.5 py-3.5"
                 type="text"
-                id="title"
+                id="subtitle"
+                name="subtitle"
                 placeholder="Ex: Send rockets to mars"
               />
             </div>
