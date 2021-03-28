@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { FiPlus, FiSettings } from 'react-icons/fi';
-import { useDatabase } from '../context/database';
+import { useDatabase } from '../contexts/database';
 
 import ProjectItem from '../components/ProjectItem';
 

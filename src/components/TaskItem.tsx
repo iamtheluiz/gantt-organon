@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Task } from '../context/task';
+import { Task } from '../contexts/task';
 
 interface TaskItemProps {
   task: Task;

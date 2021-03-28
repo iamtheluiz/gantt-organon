@@ -3,9 +3,9 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import { Picker } from 'emoji-mart';
 
-import { useDatabase } from '../context/database';
+import { useDatabase } from '../contexts/database';
 
-import ProjectModel from '../model/Project';
+import ProjectModel from '../models/Project';
 
 import '../styles/pages/Create.css';
 import 'emoji-mart/css/emoji-mart.css';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Task } from '../context/task';
+import { Task } from '../contexts/task';
 
 import '../styles/pages/Home.css';
 

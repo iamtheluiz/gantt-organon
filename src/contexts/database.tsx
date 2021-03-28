@@ -4,9 +4,9 @@ import React, { createContext, useContext } from 'react';
 import { Database } from '@nozbe/watermelondb';
 import LokiJSAdapter from '@nozbe/watermelondb/adapters/lokijs';
 
-import schema from '../model/schema';
-import ProjectModel from '../model/Project';
-import TaskModel from '../model/Task';
+import schema from '../models/schema';
+import ProjectModel from '../models/Project';
+import TaskModel from '../models/Task';
 
 interface DatabaseContextProps {
   database: Database

@@ -1,7 +1,7 @@
 import Routes from './routes';
 
-import { DatabaseProvider } from './context/database';
-import { TaskProvider } from './context/task';
+import { DatabaseProvider } from './contexts/database';
+import { TaskProvider } from './contexts/task';
 
 import './styles/global.css';
 
