@@ -1,32 +1,3 @@
 section#home > header h1 {
   font: 900 2.4rem 'Merriweather', serif;
 }
-section#home div.projectItem .iconContainer {
-  padding-bottom: 100%;
-}
-section#home div.projectItem .iconContainer svg {
-  --svg-width: 40px;
-
-  position: absolute;
-  top: calc((100% - var(--svg-width)) / 2);
-  left: calc((100% - var(--svg-width)) / 2);
-
-  width: var(--svg-width);
-  height: var(--svg-width);
-
-  transition: all 0.2s;
-}
-
-section#home div.projectItem:hover {
-  transform: translateY(-6px);
-}
-section#home div.projectItem:hover .iconContainer {
-  border-color: var(--active-color);
-}
-section#home div.projectItem:hover .iconContainer svg {
-  color: var(--active-color) !important;
-}
-section#home div.projectItem:hover strong,
-section#home div.projectItem:hover span {
-  color: var(--active-color) !important;
-}

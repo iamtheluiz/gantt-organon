@@ -1,96 +1,142 @@
-import { useEffect, useState } from 'react';
-import { FiDownload, FiPlus } from 'react-icons/fi';
+import { FormEvent, useState } from 'react';
+import { FiDownload, FiPlus, FiX } from 'react-icons/fi';
 import { BiRocket } from 'react-icons/bi';
-import TaskInfo, { Task } from '../components/TaskInfo';
+
+import { useTask } from '../contexts/task';
+
+import Header from '../components/Header';
+import TaskTimeline from '../components/TaskTimeline';
 
 import '../styles/pages/Project.css';
-import Header from '../components/Header';
-import TaskItem from '../components/TaskItem';
 
 function Project() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const months = ['Jan/21', 'Fev/21', 'Mar/21', 'Abr/21', 'Mai/21'];
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { addNewTask } = useTask();
 
-  useEffect(() => {
-    setTasks([
-      {
-        name: 'Planning',
-        color: '#f98e72',
-        start: '01/03/2021',
-        end: '01/05/2021',
-      },
-      {
-        name: 'Development',
-        color: '#79d5f8',
-        start: '01/03/2021',
-        end: '01/05/2021',
-      },
-      {
-        name: 'Deploy',
-        color: '#4398b9',
-        start: '01/04/2021',
-        end: '01/05/2021',
-      },
-      {
-        name: 'Tests',
-        color: '#3ea776',
-        start: '01/04/2021',
-        end: '01/05/2021',
-      },
-    ]);
-  }, []);
+  function toggleModal() {
+    setModalIsOpen(!modalIsOpen);
+  }
+
+  function handleSubmitNewTask(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData: Record<string, string> = {};
+    const formInputs = form.getElementsByTagName('input');
+
+    for (let inputIndex = 0; inputIndex < formInputs.length; inputIndex++) {
+      const input = formInputs[inputIndex];
+      const inputName = input.getAttribute('name');
+
+      if (inputName !== null) {
+        formData[inputName] = input.value;
+      }
+    }
+
+    addNewTask({
+      name: formData.name,
+      color: formData.color,
+      start: new Date(formData.start.split('-').join('/')),
+      end: new Date(formData.end.split('-').join('/')),
+    });
+
+    form.reset();
+    setModalIsOpen(false);
+  }
 
   return (
-    <section id="project" className="w-full min-h-screen dark:bg-black">
-      <Header title="Rocket" subtitle="Send rockets to mars!" backTo="/">
-        <BiRocket size={28} color="#FFF" />
-      </Header>
-      <main className="p-4">
-        <header className="flex flex-row-reverse">
-          <div className="flex flex-row gap-2">
-            <button
-              className="button max-w-max flex justify-center items-center shadow-md"
-            >
-              <FiDownload color="#fff" size={18} />
-              <span className="text-sm ml-1 text-white">Export</span>
-            </button>
-            <button className="button max-w-max flex justify-center items-center shadow-md">
-              <FiPlus color="#fff" size={18} />
-              <span className="text-sm ml-1 text-white">Add Task</span>
-            </button>
-          </div>
-        </header>
-
-        <div className="flex flex-row mt-4 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
-          <aside className="taskList max-w-md w-full border-r-2 border-gray-200 dark:border-gray-700">
-            <div className="flex items-center text-left w-full h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
-              <strong className="flex-1 text-gray-400">Task name</strong>
-              <strong className="w-24 text-gray-400">Progress</strong>
-            </div>
-            {tasks.map((task) => (
-              <TaskInfo key={task.name} task={task} />
-            ))}
-          </aside>
-
-          <div className="flex flex-col overflow-x-auto w-full">
-            <header className="flex flex-row w-max items-center h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
-              {months.map((month) => (
-                <div key={month} className="flex flex-col" style={{ minWidth: '14rem' }}>
-                  <div className="flex items-center text-left w-full">
-                    <strong className="flex-1 text-gray-400">{month}</strong>
-                  </div>
+    <>
+      {modalIsOpen && (
+        <div className="absolute -inset-0 flex items-center justify-center w-full min-h-screen overflow-y-auto bg-black bg-opacity-80 z-30">
+          <div className="max-w-lg w-full px-4">
+            <form onSubmit={handleSubmitNewTask}>
+              <header className="w-full py-4 rounded-lg">
+                <button onClick={toggleModal} className="linkHover w-7 flex justify-center items-center">
+                  <FiX className="w-full h-full text-gray-300" />
+                </button>
+              </header>
+              <div className="w-full pt-4 pb-6">
+                <h1 className="text-4xl font-semibold text-gray-300">Create new Task</h1>
+                <div className="input-field flex flex-col py-2">
+                  <label htmlFor="name" className="pb-1 text-base font-medium text-gray-400">Name</label>
+                  <input
+                    className="placeholder-gray-400 border-gray-500 border-b-2 text-base px-2.5 py-3.5"
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Ex: Planning"
+                  />
                 </div>
-              ))}
-            </header>
-            <div className="flex-1 px-4">
-              {tasks.map((task) => (
-                <TaskItem key={task.name} task={task} />
-              ))}
-            </div>
+                <div className="input-field flex flex-col py-2">
+                  <label htmlFor="color" className="pb-1 text-base font-medium text-gray-400">Color</label>
+                  <input
+                    className="border-gray-500 border-b-2 text-base px-2.5 py-3.5"
+                    type="color"
+                    id="color"
+                    name="color"
+                  />
+                </div>
+                <div className="input-field flex flex-col py-2">
+                  <label htmlFor="start" className="pb-1 text-base font-medium text-gray-400">Start</label>
+                  <input
+                    className="placeholder-gray-400 border-gray-500 border-b-2 text-base px-2.5 py-3.5"
+                    type="date"
+                    id="start"
+                    name="start"
+                    placeholder="Ex: Send rockets to mars"
+                  />
+                </div>
+                <div className="input-field flex flex-col py-2">
+                  <label htmlFor="end" className="pb-1 text-base font-medium text-gray-400">End</label>
+                  <input
+                    className="placeholder-gray-400 border-gray-500 border-b-2 text-base px-2.5 py-3.5"
+                    type="date"
+                    id="end"
+                    name="end"
+                    placeholder="Ex: Send rockets to mars"
+                  />
+                </div>
+              </div>
+              <footer className="grid grid-cols-2 gap-2">
+                <button
+                  className="button text-gray-800 dark:text-gray-600"
+                  type="reset"
+                  style={{ backgroundColor: '#dde9f3' }}
+                >
+                  Clear
+                </button>
+                <button className="button text-white" type="submit">Create</button>
+              </footer>
+            </form>
           </div>
         </div>
-      </main>
-    </section>
+      )}
+      <section id="project" className="w-full min-h-screen dark:bg-black">
+        <Header title="Rocket" subtitle="Send rockets to mars!" backTo="/">
+          <BiRocket size={28} color="#FFF" />
+        </Header>
+
+        <main className="p-4">
+
+          <header className="flex flex-row-reverse">
+            <div className="flex flex-row gap-2">
+              <button className="button max-w-max flex justify-center items-center shadow-md">
+                <FiDownload color="#fff" size={18} />
+                <span className="text-sm ml-1 text-white">Export</span>
+              </button>
+              <button className="button max-w-max flex justify-center items-center shadow-md" onClick={toggleModal}>
+                <FiPlus color="#fff" size={18} />
+                <span className="text-sm ml-1 text-white">Add Task</span>
+              </button>
+            </div>
+          </header>
+
+          <div className="flex flex-row mt-4 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
+            <TaskTimeline />
+          </div>
+        </main>
+      </section>
+    </>
   );
 }
 

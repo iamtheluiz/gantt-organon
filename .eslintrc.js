@@ -27,6 +27,9 @@ module.exports = {
     'react/button-has-type': 'off',
     'react/prop-types': 'off',
     'max-len': 'off',
+    'linebreak-style': 'off',
+    'no-plusplus': 'off',
+    'no-param-reassign': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

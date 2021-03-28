@@ -1,0 +1,42 @@
+div.projectItem .iconContainer {
+  padding-bottom: 100%;
+}
+div.projectItem .iconContainer svg {
+  --svg-width: 40px;
+
+  position: absolute;
+  top: calc((100% - var(--svg-width)) / 2);
+  left: calc((100% - var(--svg-width)) / 2);
+
+  width: var(--svg-width);
+  height: var(--svg-width);
+
+  transition: all 0.2s;
+}
+div.projectItem .iconContainer span {
+  --font-size: 40px;
+
+  position: absolute;
+  top: calc((100% - var(--font-size)) / 2);
+
+  width: 100%;
+  font-size: var(--font-size);
+  line-height: var(--font-size);
+  text-align: center;
+
+  transition: all 0.2s;
+}
+
+div.projectItem:hover {
+  transform: translateY(-6px);
+}
+div.projectItem:hover .iconContainer {
+  border-color: var(--active-color);
+}
+div.projectItem:hover .iconContainer svg {
+  color: var(--active-color) !important;
+}
+div.projectItem:hover strong,
+div.projectItem:hover span {
+  color: var(--active-color) !important;
+}

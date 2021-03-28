@@ -1,20 +1,31 @@
+import { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { FiPlus, FiSettings } from 'react-icons/fi';
-import { BiRocket } from 'react-icons/bi';
+import { useDatabase } from '../contexts/database';
 
 import ProjectItem from '../components/ProjectItem';
 
 import '../styles/pages/Home.css';
 
 function Home() {
+  const [projects, setProjects] = useState<any[]>([]);
   const history = useHistory();
+  const { database } = useDatabase();
+
+  useEffect(() => {
+    async function getProjects() {
+      setProjects(await database.get('projects').query().fetch());
+    }
+
+    getProjects();
+  }, []);
 
   function handleNavigateToCreateNewProject() {
     history.push('/create');
   }
 
-  function handleNavigateToProject() {
-    history.push('/project/1');
+  function handleNavigateToProject(id: string) {
+    history.push(`/project/${id}`);
   }
 
   return (
@@ -39,15 +50,17 @@ function Home() {
                 <FiPlus className="text-gray-700 dark:text-gray-300" />
               </ProjectItem>
             </li>
-            <li>
-              <ProjectItem
-                handleUserClick={handleNavigateToProject}
-                title="Rocket"
-                subtitle="Send rockets to mars!"
-              >
-                <BiRocket className="text-gray-700 dark:text-gray-300" />
-              </ProjectItem>
-            </li>
+            {projects.map((project) => (
+              <li key={project.id}>
+                <ProjectItem
+                  handleUserClick={() => handleNavigateToProject(project.id)}
+                  title={project.title}
+                  subtitle={project.subtitle}
+                >
+                  <span>{project.emoji}</span>
+                </ProjectItem>
+              </li>
+            ))}
           </ul>
         </div>
       </section>
