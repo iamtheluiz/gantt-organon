@@ -2,6 +2,7 @@ import React from 'react';
 import { Task } from '../contexts/project';
 
 import '../styles/pages/Home.css';
+import getDayCount from '../utils/getDayCount';
 
 interface TaskInfoProps {
   task: Task;
@@ -16,15 +17,8 @@ export const TaskInfo: React.FC<TaskInfoProps> = ({ task }) => (
       <strong className="text-base text-gray-600 dark:text-gray-300 ml-1 sm:inline hidden">{task.name}</strong>
     </div>
     <div className="flex flex-row items-center w-24">
-      <div
-        className="flex flex-row items-center justify-center w-9 h-9 rounded-full"
-        style={{ backgroundColor: task.color }}
-      >
-        <div className="w-6 h-6 rounded-full bg-white dark:bg-gray-600" />
-      </div>
-      <span className="ml-2 dark:text-gray-300">
-        <strong>7</strong>
-        /10
+      <span className="text-base text-gray-400">
+        {getDayCount(task.start, task.end)}
       </span>
     </div>
   </div>

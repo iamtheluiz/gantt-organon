@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Task } from '../contexts/project';
+import getDayCount from '../utils/getDayCount';
 
 interface TaskItemProps {
   task: Task;
@@ -10,11 +11,10 @@ interface TaskItemProps {
 const TaskItem: React.FC<TaskItemProps> = ({ task, daySize, firstTimelineDay }) => {
   const [width, setWidth] = useState(0);
   const [offset, setOffset] = useState(0);
-  const millisecondsInOneDay = 24 * 60 * 60 * 1000;
 
   useEffect(() => {
     // Get day count
-    const dayCount: number = (task.end.getTime() - task.start.getTime()) / millisecondsInOneDay;
+    const dayCount: number = getDayCount(task.start, task.end);
 
     setWidth(dayCount * daySize);
   }, [task, daySize]);
@@ -22,7 +22,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, daySize, firstTimelineDay }) 
   useEffect(() => {
     // Offset
     if (firstTimelineDay !== null) {
-      const dayCount: number = (task.start.getTime() - firstTimelineDay.getTime()) / millisecondsInOneDay;
+      const dayCount: number = getDayCount(firstTimelineDay, task.start);
 
       setOffset(dayCount * daySize);
     }

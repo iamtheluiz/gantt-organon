@@ -59,7 +59,7 @@ function TaskTimeline() {
           <aside className="taskList max-w-min sm:max-w-md w-full border-r-2 border-gray-200 dark:border-gray-700">
             <div className="flex items-center text-left w-full h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
               <strong className="flex-1 text-gray-400 hidden sm:inline">Task name</strong>
-              <strong className="w-24 text-gray-400">Progress</strong>
+              <strong className="w-24 text-gray-400">Work Days</strong>
             </div>
             {tasks.map((task) => (
               <TaskInfo key={task.name} task={task} />
