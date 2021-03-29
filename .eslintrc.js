@@ -30,6 +30,7 @@ module.exports = {
     'linebreak-style': 'off',
     'no-plusplus': 'off',
     'no-param-reassign': 'off',
+    camelcase: 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

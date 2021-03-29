@@ -1,20 +1,17 @@
 import { Model } from '@nozbe/watermelondb';
 import { field, date, relation } from '@nozbe/watermelondb/decorators';
+import ProjectModel from './Project';
 
 export default class TaskModel extends Model {
   static table = 'tasks'
 
-  public associations = {
-    tasks: { type: 'has_many', foreignKey: 'project_id' },
-  };
+  @field('name') name: string | undefined
 
-  @field('name') name: any
+  @field('color') color: string | undefined
 
-  @field('color') color: any
+  @date('start') start: Date | undefined
 
-  @date('start') start: any
+  @date('end') end: Date | undefined
 
-  @date('end') end: any
-
-  @relation('projects', 'project_id') project: any
+  @relation('projects', 'project_id') project!: ProjectModel;
 }

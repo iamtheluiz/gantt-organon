@@ -16,8 +16,8 @@ export default appSchema({
       columns: [
         { name: 'name', type: 'string' },
         { name: 'color', type: 'string' },
-        { name: 'start', type: 'string' },
-        { name: 'end', type: 'string' },
+        { name: 'start', type: 'number' },
+        { name: 'end', type: 'number' },
         { name: 'project_id', type: 'string', isIndexed: true },
       ],
     }),
