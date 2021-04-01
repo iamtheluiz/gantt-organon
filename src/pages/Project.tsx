@@ -12,6 +12,7 @@ import Header from '../components/Header';
 import TaskTimeline from '../components/TaskTimeline';
 
 import '../styles/pages/Project.css';
+import getFormInputValues from '../utils/getFormInputValues';
 
 function Project() {
   const [project, setProject] = useState<any>(null);
@@ -40,17 +41,7 @@ function Project() {
     event.preventDefault();
 
     const form = event.currentTarget;
-    const formData: Record<string, string> = {};
-    const formInputs = form.getElementsByTagName('input');
-
-    for (let inputIndex = 0; inputIndex < formInputs.length; inputIndex++) {
-      const input = formInputs[inputIndex];
-      const inputName = input.getAttribute('name');
-
-      if (inputName !== null) {
-        formData[inputName] = input.value;
-      }
-    }
+    const formData = getFormInputValues(form);
 
     addNewTask({
       name: formData.name,

@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import { Picker } from 'emoji-mart';
+import getFormInputValues from '../utils/getFormInputValues';
 
 import { useDatabase } from '../contexts/database';
 
@@ -21,17 +22,7 @@ function Create() {
     event.preventDefault();
 
     const form = event.currentTarget;
-    const formData: Record<string, string> = {};
-    const formInputs = form.getElementsByTagName('input');
-
-    for (let inputIndex = 0; inputIndex < formInputs.length; inputIndex++) {
-      const input = formInputs[inputIndex];
-      const inputName = input.getAttribute('name');
-
-      if (inputName !== null) {
-        formData[inputName] = input.value;
-      }
-    }
+    const formData = getFormInputValues(form);
 
     const projectsCollection = database.collections.get<ProjectModel>('projects');
 
