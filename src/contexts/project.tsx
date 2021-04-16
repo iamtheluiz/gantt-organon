@@ -7,6 +7,7 @@ import TaskModel from '../models/Task';
 import sortTaskList from '../utils/sortTaskList';
 
 export type Task = {
+  id?: string;
   name: string;
   color: string;
   start: Date;

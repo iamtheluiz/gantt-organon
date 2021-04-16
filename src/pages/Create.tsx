@@ -50,7 +50,13 @@ function Create() {
           <div className="w-full pt-4 pb-6">
             <div className="flex flex-row items-center">
               <div className="relative input-field flex flex-col py-2">
-                <button type="button" className="text-3xl mr-2" onClick={() => setEmojiMenuIsOpen(!emojiMenuIsOpen)}>{selectedEmoji}</button>
+                <button
+                  type="button"
+                  className="text-3xl mr-2"
+                  onClick={() => setEmojiMenuIsOpen(!emojiMenuIsOpen)}
+                >
+                  {selectedEmoji}
+                </button>
                 <Picker
                   style={{
                     position: 'absolute', top: '0px', left: '40px', display: emojiMenuIsOpen ? 'initial' : 'none',

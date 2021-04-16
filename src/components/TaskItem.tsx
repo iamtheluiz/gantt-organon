@@ -6,9 +6,12 @@ interface TaskItemProps {
   task: Task;
   daySize: number;
   firstTimelineDay: Date | null;
+  tabIndex: number;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task, daySize, firstTimelineDay }) => {
+const TaskItem: React.FC<TaskItemProps> = ({
+  task, daySize, firstTimelineDay, tabIndex,
+}) => {
   const [width, setWidth] = useState(0);
   const [offset, setOffset] = useState(0);
 
@@ -28,13 +31,23 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, daySize, firstTimelineDay }) 
     }
   }, [firstTimelineDay]);
 
+  function handleToggleOptionsMenu() {
+  }
+
   return (
     <div
       key={task.name}
-      className="flex flex-row items-center text-lef h-14"
+      className="relative flex flex-col items-center text-lef h-14 py-0.5"
       style={{ width: `${width}rem`, marginLeft: `${offset}rem` }}
     >
-      <div className="w-full flex flex-col py-2 px-3 rounded-md" style={{ backgroundColor: task.color }}>
+      <div
+        className="w-full h-full flex flex-col justify-center px-3 rounded-md transition-all"
+        style={{ backgroundColor: task.color }}
+        onClick={handleToggleOptionsMenu}
+        onKeyDown={handleToggleOptionsMenu}
+        role="button"
+        tabIndex={tabIndex}
+      >
         <strong className="text-sm text-gray-800">{task.name}</strong>
         <span className="text-xs text-gray-700">{`${task.start.toLocaleDateString()} - ${task.end.toLocaleDateString()}`}</span>
       </div>

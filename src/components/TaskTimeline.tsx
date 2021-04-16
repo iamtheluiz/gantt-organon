@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import ScrollContainer from 'react-indiana-drag-scroll';
+
 import { useProject } from '../contexts/project';
 
 import TaskInfo from './TaskInfo';
@@ -56,7 +58,7 @@ function TaskTimeline() {
       )}
       {tasks.length > 0 && (
         <>
-          <aside className="taskList max-w-min sm:max-w-md w-full border-r-2 border-gray-200 dark:border-gray-700">
+          <aside className="taskList max-w-min hidden md:inline sm:max-w-md w-full border-r-2 border-gray-200 dark:border-gray-700">
             <div className="flex items-center text-left w-full h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
               <strong className="flex-1 text-gray-400 hidden sm:inline">Task name</strong>
               <strong className="w-24 text-gray-400">Work Days</strong>
@@ -66,7 +68,7 @@ function TaskTimeline() {
             ))}
           </aside>
 
-          <div className="flex flex-col overflow-x-auto w-full">
+          <ScrollContainer className="flex flex-col w-full">
             {months !== null && (
               <>
                 <header className="flex flex-row w-max items-center h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
@@ -79,13 +81,13 @@ function TaskTimeline() {
                   ))}
                 </header>
                 <div className="flex-1 px-4">
-                  {tasks.map((task) => (
-                    <TaskItem key={task.name} task={task} daySize={daySize} firstTimelineDay={firstMonth} />
+                  {tasks.map((task, index) => (
+                    <TaskItem key={task.name} task={task} daySize={daySize} firstTimelineDay={firstMonth} tabIndex={index + 5} />
                   ))}
                 </div>
               </>
             )}
-          </div>
+          </ScrollContainer>
         </>
       )}
     </>

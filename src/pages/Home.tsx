@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { FiPlus, FiSettings } from 'react-icons/fi';
+import { AiOutlineSchedule } from 'react-icons/ai';
 import { useDatabase } from '../contexts/database';
 
 import ProjectItem from '../components/ProjectItem';
@@ -35,11 +36,21 @@ function Home() {
       </Link>
       <section id="home" className="flex justify-center items-center flex-col w-full max-w-xl p-4">
         <header className="text-center w-full">
-          <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200">Gantt Organon</h1>
+          <div className="flex flex-row items-center justify-center mb-2">
+            <AiOutlineSchedule className="text-6xl font-bold text-gray-800 dark:text-gray-200" />
+            <h1
+              className="text-3xl font-bold text-gray-800 dark:text-gray-200 text-left ml-1"
+              style={{ lineHeight: '2rem' }}
+            >
+              Gantt
+              <br />
+              Organon
+            </h1>
+          </div>
           <span className="text-lg font-light text-gray-600 dark:text-gray-300">Project Schedule in WEB</span>
         </header>
         <div className="w-full mt-8 overflow-y-auto max-h-96">
-          <ul className="grid grid-cols-3 list-none gap-2">
+          <ul className="grid grid-cols-2 md:grid-cols-3 list-none gap-2">
             <li>
               <ProjectItem
                 handleUserClick={handleNavigateToCreateNewProject}
