@@ -5,8 +5,9 @@
 @tailwind utilities;
 
 body, div#root {
+  --light-background: #f4f5fb;
   min-height: 100vh;
-  background-color: aliceblue;
+  background-color: var(--light-background);
 }
 div#root {
   display: flex;

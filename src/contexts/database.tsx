@@ -20,10 +20,6 @@ const DatabaseProvider: React.FC = ({ children }) => {
     schema,
     useWebWorker: false,
     useIncrementalIndexedDB: true,
-    onQuotaExceededError: (error) => {
-    // Browser ran out of disk space -- do something about it
-      console.warn(error);
-    },
   });
 
   const database = new Database({
@@ -49,7 +45,7 @@ function useDatabase(): DatabaseContextProps {
   const context = useContext(DatabaseContext);
 
   if (!context) {
-    throw new Error('useHorse must be used within a HorseProvider');
+    throw new Error('useDatabase must be used within a DatabaseProvider');
   }
 
   return context;

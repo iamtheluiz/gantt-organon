@@ -1,42 +1,46 @@
-div.projectItem .iconContainer {
-  padding-bottom: 100%;
+ .projectItem, .projectItem .content, .projectItem .overlay {
+  border-radius: 16px;
 }
-div.projectItem .iconContainer svg {
-  --svg-width: 40px;
+.projectItem {
+  --icon-size: 40px;
 
-  position: absolute;
-  top: calc((100% - var(--svg-width)) / 2);
-  left: calc((100% - var(--svg-width)) / 2);
-
-  width: var(--svg-width);
-  height: var(--svg-width);
+  padding-bottom: 100%;
+  border-width: 2px;
+}
+.projectItem .content svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
 
   transition: all 0.2s;
 }
-div.projectItem .iconContainer span {
-  --font-size: 40px;
-
-  position: absolute;
-  top: calc((100% - var(--font-size)) / 2);
-
+.projectItem .content span {
   width: 100%;
-  font-size: var(--font-size);
-  line-height: var(--font-size);
+  font-size: var(--icon-size);
+  line-height: var(--icon-size);
   text-align: center;
 
   transition: all 0.2s;
 }
 
-div.projectItem:hover {
+.projectItem:hover {
   transform: translateY(-6px);
+  border: 0px;
 }
-div.projectItem:hover .iconContainer {
-  border-color: var(--active-color);
+
+.projectItem .overlay {
+  height: 50px;
+  visibility: hidden;
 }
-div.projectItem:hover .iconContainer svg {
-  color: var(--active-color) !important;
+.projectItem .overlay span {
+  font-size: 0px !important;
 }
-div.projectItem:hover strong,
-div.projectItem:hover span {
-  color: var(--active-color) !important;
+.projectItem:hover .overlay {
+  visibility: initial;
+  height: 100% !important;
+  background-color: var(--active-color) !important;
+  font-size: initial !important;
+}
+.projectItem:hover .overlay span {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
 }

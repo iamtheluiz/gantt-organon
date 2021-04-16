@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import { Picker } from 'emoji-mart';
+import getFormInputValues from '../utils/getFormInputValues';
 
 import { useDatabase } from '../contexts/database';
 
@@ -21,17 +22,7 @@ function Create() {
     event.preventDefault();
 
     const form = event.currentTarget;
-    const formData: Record<string, string> = {};
-    const formInputs = form.getElementsByTagName('input');
-
-    for (let inputIndex = 0; inputIndex < formInputs.length; inputIndex++) {
-      const input = formInputs[inputIndex];
-      const inputName = input.getAttribute('name');
-
-      if (inputName !== null) {
-        formData[inputName] = input.value;
-      }
-    }
+    const formData = getFormInputValues(form);
 
     const projectsCollection = database.collections.get<ProjectModel>('projects');
 
@@ -59,7 +50,13 @@ function Create() {
           <div className="w-full pt-4 pb-6">
             <div className="flex flex-row items-center">
               <div className="relative input-field flex flex-col py-2">
-                <button type="button" className="text-3xl mr-2" onClick={() => setEmojiMenuIsOpen(!emojiMenuIsOpen)}>{selectedEmoji}</button>
+                <button
+                  type="button"
+                  className="text-3xl mr-2"
+                  onClick={() => setEmojiMenuIsOpen(!emojiMenuIsOpen)}
+                >
+                  {selectedEmoji}
+                </button>
                 <Picker
                   style={{
                     position: 'absolute', top: '0px', left: '40px', display: emojiMenuIsOpen ? 'initial' : 'none',

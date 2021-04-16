@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Task } from '../contexts/task';
+import { Task } from '../contexts/project';
+import getDayCount from '../utils/getDayCount';
 
 interface TaskItemProps {
   task: Task;
   daySize: number;
   firstTimelineDay: Date | null;
+  tabIndex: number;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task, daySize, firstTimelineDay }) => {
+const TaskItem: React.FC<TaskItemProps> = ({
+  task, daySize, firstTimelineDay, tabIndex,
+}) => {
   const [width, setWidth] = useState(0);
   const [offset, setOffset] = useState(0);
-  const millisecondsInOneDay = 24 * 60 * 60 * 1000;
 
   useEffect(() => {
     // Get day count
-    const dayCount: number = (task.end.getTime() - task.start.getTime()) / millisecondsInOneDay;
+    const dayCount: number = getDayCount(task.start, task.end);
 
     setWidth(dayCount * daySize);
   }, [task, daySize]);
@@ -22,19 +25,29 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, daySize, firstTimelineDay }) 
   useEffect(() => {
     // Offset
     if (firstTimelineDay !== null) {
-      const dayCount: number = (task.start.getTime() - firstTimelineDay.getTime()) / millisecondsInOneDay;
+      const dayCount: number = getDayCount(firstTimelineDay, task.start);
 
       setOffset(dayCount * daySize);
     }
   }, [firstTimelineDay]);
 
+  function handleToggleOptionsMenu() {
+  }
+
   return (
     <div
       key={task.name}
-      className="flex flex-row items-center text-lef h-14"
+      className="relative flex flex-col items-center text-lef h-14 py-0.5"
       style={{ width: `${width}rem`, marginLeft: `${offset}rem` }}
     >
-      <div className="w-full flex flex-col py-2 px-3 rounded-md" style={{ backgroundColor: task.color }}>
+      <div
+        className="w-full h-full flex flex-col justify-center px-3 rounded-md transition-all"
+        style={{ backgroundColor: task.color }}
+        onClick={handleToggleOptionsMenu}
+        onKeyDown={handleToggleOptionsMenu}
+        role="button"
+        tabIndex={tabIndex}
+      >
         <strong className="text-sm text-gray-800">{task.name}</strong>
         <span className="text-xs text-gray-700">{`${task.start.toLocaleDateString()} - ${task.end.toLocaleDateString()}`}</span>
       </div>

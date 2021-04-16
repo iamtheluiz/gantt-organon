@@ -1,16 +1,16 @@
 import Routes from './routes';
 
 import { DatabaseProvider } from './contexts/database';
-import { TaskProvider } from './contexts/task';
+import { ProjectProvider } from './contexts/project';
 
 import './styles/global.css';
 
 function App() {
   return (
     <DatabaseProvider>
-      <TaskProvider>
+      <ProjectProvider>
         <Routes />
-      </TaskProvider>
+      </ProjectProvider>
     </DatabaseProvider>
   );
 }

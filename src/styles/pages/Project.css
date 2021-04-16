@@ -14,3 +14,16 @@ section#project > header div#logo {
 section#project aside.taskList table tbody tr:last-child {
   border-radius: 2px 0px 0px 2px;
 }
+
+section#project input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 32px;
+	height: 32px;
+}
+section#project input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+section#project input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
