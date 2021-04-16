@@ -1,10 +1,11 @@
+import React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import useDarkTheme from '../hooks/useDarkTheme';
 
 import '../styles/pages/Create.css';
 
-function Settings() {
+const Settings: React.FC = ({ children }) => {
   const { darkTheme, setDarkTheme } = useDarkTheme();
   const history = useHistory();
 
@@ -43,10 +44,11 @@ function Settings() {
               />
             </div>
           </div>
+          {children}
         </div>
       </section>
     </div>
   );
-}
+};
 
 export default Settings;

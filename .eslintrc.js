@@ -30,6 +30,8 @@ module.exports = {
     'linebreak-style': 'off',
     'no-plusplus': 'off',
     'no-param-reassign': 'off',
+    'no-alert': 'off',
+    'no-restricted-globals': 'off',
     camelcase: 'off',
     'import/extensions': [
       'error',

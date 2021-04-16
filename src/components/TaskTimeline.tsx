@@ -6,7 +6,7 @@ import { useProject } from '../contexts/project';
 import TaskInfo from './TaskInfo';
 import TaskItem from './TaskItem';
 
-import '../styles/pages/Project.css';
+import '../styles/components/TaskTimeline.css';
 
 function TaskTimeline() {
   const { tasks } = useProject();
@@ -68,22 +68,34 @@ function TaskTimeline() {
             ))}
           </aside>
 
-          <ScrollContainer className="flex flex-col w-full">
+          <ScrollContainer className="TaskTimeline flex flex-col w-full">
             {months !== null && (
               <>
                 <header className="flex flex-row w-max items-center h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
                   {months.map((month) => (
-                    <div key={month.display} className="flex flex-col" style={{ minWidth: `${daySize * 30}rem` }}>
+                    <div key={month.display} className="flex flex-col" style={{ minWidth: `${daySize * month.dayCount}rem` }}>
                       <div className="flex items-center text-left w-full">
                         <strong className="flex-1 text-gray-400">{month.display}</strong>
                       </div>
                     </div>
                   ))}
                 </header>
-                <div className="flex-1 px-4">
-                  {tasks.map((task, index) => (
-                    <TaskItem key={task.name} task={task} daySize={daySize} firstTimelineDay={firstMonth} tabIndex={index + 5} />
+                <div className="relative flex flex-row flex-1 px-4">
+                  {months.map((month) => (
+                    <div
+                      className="monthBox flex flex-row h-full border-gray-300 dark:border-gray-500 border-dashed"
+                      style={{ minWidth: `${daySize * month.dayCount}rem` }}
+                    >
+                      {Array(month.dayCount).fill('').map(() => (
+                        <div className="dayBox h-full border-gray-100 dark:border-gray-700" style={{ minWidth: `${daySize}rem` }} />
+                      ))}
+                    </div>
                   ))}
+                  <div className="absolute top-0 left-0">
+                    {tasks.map((task, index) => (
+                      <TaskItem key={task.name} task={task} daySize={daySize} firstTimelineDay={firstMonth} tabIndex={index + 5} />
+                    ))}
+                  </div>
                 </div>
               </>
             )}

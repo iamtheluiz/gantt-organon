@@ -1,0 +1,10 @@
+.TaskTimeline .monthBox {
+  border-left-width: 2px;
+}
+.TaskTimeline .monthBox .dayBox:first-child {
+  border-left-width: 0px;
+}
+.TaskTimeline .monthBox .dayBox {
+  border-left-width: 1px;
+  border-right-width: 1px;
+}
