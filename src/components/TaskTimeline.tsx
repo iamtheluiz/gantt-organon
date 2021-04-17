@@ -11,7 +11,7 @@ import '../styles/components/TaskTimeline.css';
 function TaskTimeline() {
   const { tasks } = useProject();
   const [months, setMonths] = useState<{ display: string, dayCount: number}[]>([]);
-  const daySize = 1;
+  const daySize = 1.2;
   const [firstMonth, setFirstMonth] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -80,22 +80,24 @@ function TaskTimeline() {
                     </div>
                   ))}
                 </header>
-                <div className="relative flex flex-row flex-1 px-4">
-                  {months.map((month) => (
-                    <div
-                      className="monthBox flex flex-row h-full border-gray-300 dark:border-gray-500 border-dashed"
-                      style={{ minWidth: `${daySize * month.dayCount}rem` }}
-                    >
-                      {Array(month.dayCount).fill('').map(() => (
-                        <div className="dayBox h-full border-gray-100 dark:border-gray-700" style={{ minWidth: `${daySize}rem` }} />
-                      ))}
-                    </div>
-                  ))}
+                <div className="relative flex flex-row flex-1 mx-4">
                   <div className="absolute top-0 left-0">
                     {tasks.map((task, index) => (
                       <TaskItem key={task.name} task={task} daySize={daySize} firstTimelineDay={firstMonth} tabIndex={index + 5} />
                     ))}
                   </div>
+                  {months.map((month) => (
+                    <div
+                      className="monthBox flex flex-row h-full border-gray-300 dark:border-gray-500 border-dashed"
+                      style={{ minWidth: `${daySize * month.dayCount}rem` }}
+                    >
+                      {Array(month.dayCount).fill('').map((value, index) => (
+                        <div className="dayBox h-full border-gray-100 dark:border-gray-700 text-center" style={{ minWidth: `${daySize}rem` }}>
+                          <span className="text-sm text-gray-400">{index + 1}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
                 </div>
               </>
             )}

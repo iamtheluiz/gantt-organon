@@ -27,7 +27,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
     if (firstTimelineDay !== null) {
       const dayCount: number = getDayCount(firstTimelineDay, task.start);
 
-      setOffset(dayCount * daySize);
+      setOffset((dayCount * daySize) - 1);
     }
   }, [firstTimelineDay]);
 
