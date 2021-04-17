@@ -27,9 +27,9 @@ const TaskItem: React.FC<TaskItemProps> = ({
     if (firstTimelineDay !== null) {
       const dayCount: number = getDayCount(firstTimelineDay, task.start);
 
-      setOffset((dayCount * daySize) - 1);
+      setOffset((dayCount * daySize) - daySize);
     }
-  }, [firstTimelineDay]);
+  }, [firstTimelineDay, daySize]);
 
   function handleToggleOptionsMenu() {
   }
@@ -49,7 +49,9 @@ const TaskItem: React.FC<TaskItemProps> = ({
         tabIndex={tabIndex}
       >
         <strong className="text-sm text-gray-800">{task.name}</strong>
-        <span className="text-xs text-gray-700">{`${task.start.toLocaleDateString()} - ${task.end.toLocaleDateString()}`}</span>
+        <span className="text-xs text-gray-700">
+          {`${task.start.toLocaleDateString()} - ${task.end.toLocaleDateString()}`}
+        </span>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export const TaskInfo: React.FC<TaskInfoProps> = ({ task }) => (
       <strong className="text-base text-gray-600 dark:text-gray-300 ml-1 sm:inline hidden">{task.name}</strong>
     </div>
     <div className="flex flex-row items-center w-24">
-      <span className="text-base text-gray-400">
+      <span className="text-base text-gray-400 hidden sm:inline">
         {getDayCount(task.start, task.end)}
       </span>
     </div>

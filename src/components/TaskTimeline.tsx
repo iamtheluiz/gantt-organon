@@ -9,11 +9,13 @@ import TaskItem from './TaskItem';
 import '../styles/components/TaskTimeline.css';
 
 function TaskTimeline() {
-  const { tasks } = useProject();
+  const [daySize, setDaySize] = useState(1);
   const [months, setMonths] = useState<{ display: string, dayCount: number}[]>([]);
-  const daySize = 1.2;
   const [firstMonth, setFirstMonth] = useState<Date | null>(null);
 
+  const { tasks } = useProject();
+
+  // TODO: Rewrite
   useEffect(() => {
     if (tasks.length > 0) {
       // On tasks change, reload month list
@@ -53,15 +55,26 @@ function TaskTimeline() {
 
   return (
     <>
-      {tasks.length === 0 && (
+      <div className="w-full flex flex-row-reverse pt-4">
+        {/* <input type="number" name="daySize" value={String(daySize)} onChange={(event) => setDaySize(Number(event.currentTarget.value))} /> */}
+        <select value={daySize} onChange={(event) => setDaySize(Number(event.currentTarget.value))}>
+          <option value={0.8}>80%</option>
+          <option value={0.9}>90%</option>
+          <option value={1}>100%</option>
+          <option value={1.1}>110%</option>
+          <option value={1.2}>120%</option>
+        </select>
+      </div>
+      <div className="flex flex-row mt-4 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
+        {tasks.length === 0 && (
         <span className="p-4 w-full text-center text-gray-400">No task found. Register one to get started!</span>
-      )}
-      {tasks.length > 0 && (
+        )}
+        {tasks.length > 0 && (
         <>
-          <aside className="taskList max-w-min hidden md:inline sm:max-w-md w-full border-r-2 border-gray-200 dark:border-gray-700">
+          <aside className="taskList pb-1 w-1 sm:max-w-md sm:w-full border-r-2 border-transparent sm:border-gray-200 sm:dark:border-gray-700">
             <div className="flex items-center text-left w-full h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
               <strong className="flex-1 text-gray-400 hidden sm:inline">Task name</strong>
-              <strong className="w-24 text-gray-400">Work Days</strong>
+              <strong className="w-24 text-gray-400 hidden sm:inline">Work Days</strong>
             </div>
             {tasks.map((task) => (
               <TaskInfo key={task.name} task={task} />
@@ -91,10 +104,11 @@ function TaskTimeline() {
                       className="monthBox flex flex-row h-full border-gray-300 dark:border-gray-500 border-dashed"
                       style={{ minWidth: `${daySize * month.dayCount}rem` }}
                     >
-                      {Array(month.dayCount).fill('').map((value, index) => (
-                        <div className="dayBox h-full border-gray-100 dark:border-gray-700 text-center" style={{ minWidth: `${daySize}rem` }}>
-                          <span className="text-sm text-gray-400">{index + 1}</span>
-                        </div>
+                      {Array(month.dayCount).fill('').map(() => (
+                        <div
+                          className="dayBox h-full border-gray-100 dark:border-gray-700"
+                          style={{ minWidth: `${daySize}rem` }}
+                        />
                       ))}
                     </div>
                   ))}
@@ -103,7 +117,8 @@ function TaskTimeline() {
             )}
           </ScrollContainer>
         </>
-      )}
+        )}
+      </div>
     </>
   );
 }

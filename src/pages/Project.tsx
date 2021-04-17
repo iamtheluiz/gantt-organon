@@ -144,7 +144,7 @@ function Project() {
         </form>
       </Modal>
 
-      <section id="project" className="w-full min-h-screen dark:bg-black">
+      <section id="project" className="flex flex-col items-center w-full min-h-screen dark:bg-black">
         {project && (
           <>
             <Header
@@ -160,7 +160,7 @@ function Project() {
               </div>
             </Header>
 
-            <main className="p-4">
+            <main className="p-4 w-full max-w-screen-2xl">
 
               <header className="flex flex-row-reverse">
                 <div className="flex flex-row gap-2">
@@ -175,9 +175,7 @@ function Project() {
                 </div>
               </header>
 
-              <div className="flex flex-row mt-4 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
-                <TaskTimeline />
-              </div>
+              <TaskTimeline />
             </main>
           </>
         )}

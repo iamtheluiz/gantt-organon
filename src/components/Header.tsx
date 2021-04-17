@@ -10,16 +10,18 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
   backTo, children, projectId,
 }) => (
-  <header className="flex justify-between p-4 bg-white dark:bg-gray-800 shadow-md">
-    <div className="flex items-center">
-      <Link to={backTo} className="linkHover w-7 flex justify-center items-center">
-        <FiArrowLeft className="w-full h-full text-gray-700 dark:text-gray-300" />
+  <header className="flex justify-center w-full bg-white dark:bg-gray-800 shadow-md">
+    <div className="max-w-screen-2xl w-full flex justify-between p-4">
+      <div className="flex items-center">
+        <Link to={backTo} className="linkHover w-7 flex justify-center items-center">
+          <FiArrowLeft className="w-full h-full text-gray-700 dark:text-gray-300" />
+        </Link>
+        {children}
+      </div>
+      <Link to={`/settings/${projectId}`} className="linkHover w-7 flex justify-center items-center">
+        <FiSettings className="w-full h-full text-gray-700 dark:text-gray-300" />
       </Link>
-      {children}
     </div>
-    <Link to={`/settings/${projectId}`} className="linkHover w-7 flex justify-center items-center">
-      <FiSettings className="w-full h-full text-gray-700 dark:text-gray-300" />
-    </Link>
   </header>
 );
 
