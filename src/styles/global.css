@@ -6,6 +6,7 @@
 
 body, div#root {
   --light-background: #f4f5fb;
+  --primary-purple: #a143b4;
   min-height: 100vh;
   background-color: var(--light-background);
 }
@@ -23,7 +24,7 @@ button.button {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
-  background-color: #a143b4;
+  background-color: var(--primary-purple);
   font-size: 1rem;
   transition: all 0.2s;
 }
@@ -35,7 +36,7 @@ button.button:hover {
   transition: all 0.2s;
 }
 .linkHover:hover svg {
-  color: #a143b4 !important;
+  color: var(--primary-purple) !important;
   transform: scale(1.2);
 }
 

@@ -11,7 +11,7 @@ interface ProjectItemProps {
 }
 
 export const ProjectItem: React.FC<ProjectItemProps> = ({
-  handleUserClick, color = '#843794', title, subtitle, children,
+  handleUserClick, color = 'var(--primary-purple)', title, subtitle, children,
 }) => (
   <div className="m-2">
     <div
