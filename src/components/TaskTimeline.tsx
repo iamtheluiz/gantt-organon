@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useProject } from '../contexts/project';
 
@@ -14,48 +14,7 @@ interface TaskTimelineProps {
 
 const TaskTimeline: React.FC<TaskTimelineProps> = ({ container = 'scroll' }) => {
   const [daySize, setDaySize] = useState(1);
-  const [months, setMonths] = useState<{ display: string, dayCount: number}[]>([]);
-  const [firstMonth, setFirstMonth] = useState<Date | null>(null);
-
-  const { tasks } = useProject();
-
-  // TODO: Rewrite
-  useEffect(() => {
-    if (tasks.length > 0) {
-      // On tasks change, reload month list
-      // Get first day of the first month
-      let firstMonthValue: Date = null as unknown as Date;
-      let lastMonthValue: Date = null as unknown as Date;
-
-      tasks.forEach((task) => {
-        if (firstMonthValue === null || task.start.getTime() < firstMonthValue.getTime()) {
-          firstMonthValue = new Date(task.start);
-        }
-        if (lastMonthValue === null || task.end.getTime() > lastMonthValue.getTime()) {
-          lastMonthValue = new Date(task.end);
-        }
-      });
-
-      // Set first day
-      firstMonthValue.setDate(1);
-      lastMonthValue.setDate(1);
-
-      setFirstMonth(new Date(firstMonthValue));
-
-      // Get month list
-      const monthList: { display: string, dayCount: number }[] = [];
-      while (firstMonthValue <= lastMonthValue) {
-        monthList.push({
-          display: `${firstMonthValue.getMonth() + 1}/${firstMonthValue.getFullYear()}`,
-          dayCount: new Date(firstMonthValue.getFullYear(), firstMonthValue.getMonth() + 1, 0).getDate(),
-        });
-
-        // Add one month
-        firstMonthValue = new Date(firstMonthValue.setMonth(firstMonthValue.getMonth() + 1));
-      }
-      setMonths(monthList);
-    }
-  }, [tasks]);
+  const { tasks, months } = useProject();
 
   return (
     <>
@@ -68,7 +27,7 @@ const TaskTimeline: React.FC<TaskTimelineProps> = ({ container = 'scroll' }) => 
           <option value={1.2}>120%</option>
         </select>
       </div>
-      <div className="flex flex-row mt-4 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
+      <div className="flex flex-row mt-4 rounded-lg bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700">
         {tasks.length === 0 && (
           <span className="p-4 w-full text-center text-gray-400">No task found. Register one to get started!</span>
         )}
@@ -85,7 +44,7 @@ const TaskTimeline: React.FC<TaskTimelineProps> = ({ container = 'scroll' }) => 
           </aside>
 
           <TaskTimelineContainer container={container} className="TaskTimeline flex flex-col w-full">
-            {months !== null && (
+            {months.length !== 0 && (
               <>
                 <header className="flex flex-row w-max items-center h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
                   {months.map((month) => (
@@ -99,7 +58,7 @@ const TaskTimeline: React.FC<TaskTimelineProps> = ({ container = 'scroll' }) => 
                 <div className="relative flex flex-row flex-1 mx-4">
                   <div className="absolute top-0 left-0">
                     {tasks.map((task, index) => (
-                      <TaskItem key={task.name} task={task} daySize={daySize} firstTimelineDay={firstMonth} tabIndex={index + 5} />
+                      <TaskItem key={task.name} task={task} daySize={daySize} firstTimelineDay={months[0].date} tabIndex={index + 5} />
                     ))}
                   </div>
                   {months.map((month) => (

@@ -1,13 +1,16 @@
 /* eslint-disable no-unused-vars */
 import React, {
-  createContext, useContext, useState,
+  createContext, useContext, useEffect, useState,
 } from 'react';
 import { useDatabase } from './database';
-import TaskModel from '../models/Task';
+
+// Utils
 import sortTaskList from '../utils/sortTaskList';
+import getMonthListFromTaskList, { Month } from '../utils/getMonthListFromTaskList';
 
 // Models
 import ProjectModel from '../models/Project';
+import TaskModel from '../models/Task';
 
 export type Task = {
   id?: string;
@@ -19,8 +22,10 @@ export type Task = {
 
 interface ProjectContextProps {
   tasks: Task[];
+  months: Month[];
   project: ProjectModel;
   setTasks: (arg0: Task[]) => void;
+  setMonths: (arg0: Month[]) => void;
   setProject: (arg0: ProjectModel) => void;
   addNewTask: (task: Task, project_id: string) => void;
   getAndSetProjectDataFromId: (project_id: string) => Promise<boolean>;
@@ -31,8 +36,16 @@ const ProjectContext = createContext<ProjectContextProps>({} as ProjectContextPr
 const ProjectProvider: React.FC = ({ children }) => {
   const [project, setProject] = useState<ProjectModel>({} as ProjectModel);
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [months, setMonths] = useState<Month[]>([]);
 
   const { database } = useDatabase();
+
+  useEffect(() => {
+    if (tasks.length > 0) {
+      const monthList = getMonthListFromTaskList(tasks);
+      setMonths(monthList);
+    }
+  }, [tasks]);
 
   async function addNewTask(task: Task, project_id: string) {
     setTasks(sortTaskList([...tasks, task]));
@@ -55,6 +68,7 @@ const ProjectProvider: React.FC = ({ children }) => {
 
       setProject(projectData);
       setTasks(sortTaskList(projectTasks));
+
       return true;
     } catch (error) {
       return false;
@@ -64,8 +78,10 @@ const ProjectProvider: React.FC = ({ children }) => {
   return (
     <ProjectContext.Provider value={{
       tasks,
+      months,
       project,
       setTasks,
+      setMonths,
       setProject,
       addNewTask,
       getAndSetProjectDataFromId,
