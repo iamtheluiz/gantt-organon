@@ -1,7 +1,8 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { FiDownload, FiPlus } from 'react-icons/fi';
 import { VscSymbolColor } from 'react-icons/vsc';
+// import html2canvas from 'html2canvas';
 
 // Components
 import { CirclePicker, SketchPicker } from 'react-color';
@@ -10,39 +11,26 @@ import TaskTimeline from '../components/TaskTimeline';
 import Modal from '../components/Modal';
 
 // Utilities
-import sortTaskList from '../utils/sortTaskList';
 import getFormInputValues from '../utils/getFormInputValues';
-
-// Models
-import ProjectModel from '../models/Project';
 
 // Contexts
 import { useProject } from '../contexts/project';
-import { useDatabase } from '../contexts/database';
 
 // Styles
 import '../styles/pages/Project.css';
 
 function Project() {
-  const [project, setProject] = useState<ProjectModel>({} as ProjectModel);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [color, setColor] = useState('#00bcd4');
 
-  const { id: project_id } = useParams<{ id: string}>();
+  const { id: project_id } = useParams<{ id: string }>();
 
-  const { addNewTask, setTasks } = useProject();
-  const { database } = useDatabase();
+  const { addNewTask, project, getAndSetProjectDataFromId } = useProject();
+  const history = useHistory();
 
   useEffect(() => {
-    async function getProjectData() {
-      const projectData = await database.get<ProjectModel>('projects').find(project_id);
-      const projectTasks = await projectData.tasks.fetch();
-
-      setProject(projectData);
-      setTasks(sortTaskList(projectTasks));
-    }
-    getProjectData();
+    getAndSetProjectDataFromId(project_id);
   }, []);
 
   function toggleModal() {
@@ -67,6 +55,10 @@ function Project() {
     }, project_id);
 
     setModalIsOpen(false);
+  }
+
+  async function handleExportDiagram() {
+    history.push(`/export/${project_id}`);
   }
 
   return (
@@ -144,7 +136,7 @@ function Project() {
         </form>
       </Modal>
 
-      <section id="project" className="flex flex-col items-center w-full min-h-screen dark:bg-black">
+      <section id="project" className="toCanvas flex flex-col items-center w-full min-h-screen dark:bg-black">
         {project && (
           <>
             <Header
@@ -164,7 +156,7 @@ function Project() {
 
               <header className="flex flex-row-reverse">
                 <div className="flex flex-row gap-2">
-                  <button className="button max-w-max flex justify-center items-center shadow-md">
+                  <button className="button max-w-max flex justify-center items-center shadow-md" onClick={handleExportDiagram}>
                     <FiDownload color="#fff" size={18} />
                     <span className="text-sm ml-1 text-white">Export</span>
                   </button>
@@ -175,7 +167,7 @@ function Project() {
                 </div>
               </header>
 
-              <TaskTimeline />
+              <TaskTimeline container="scroll" />
             </main>
           </>
         )}

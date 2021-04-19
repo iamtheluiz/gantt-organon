@@ -1,14 +1,18 @@
-import { useEffect, useState } from 'react';
-import ScrollContainer from 'react-indiana-drag-scroll';
+import React, { useEffect, useState } from 'react';
 
 import { useProject } from '../contexts/project';
 
 import TaskInfo from './TaskInfo';
 import TaskItem from './TaskItem';
+import TaskTimelineContainer from './TaskTimelineContainer';
 
 import '../styles/components/TaskTimeline.css';
 
-function TaskTimeline() {
+interface TaskTimelineProps {
+  container?: 'div' | 'scroll';
+}
+
+const TaskTimeline: React.FC<TaskTimelineProps> = ({ container = 'scroll' }) => {
   const [daySize, setDaySize] = useState(1);
   const [months, setMonths] = useState<{ display: string, dayCount: number}[]>([]);
   const [firstMonth, setFirstMonth] = useState<Date | null>(null);
@@ -56,7 +60,6 @@ function TaskTimeline() {
   return (
     <>
       <div className="w-full flex flex-row-reverse pt-4">
-        {/* <input type="number" name="daySize" value={String(daySize)} onChange={(event) => setDaySize(Number(event.currentTarget.value))} /> */}
         <select value={daySize} onChange={(event) => setDaySize(Number(event.currentTarget.value))}>
           <option value={0.8}>80%</option>
           <option value={0.9}>90%</option>
@@ -67,7 +70,7 @@ function TaskTimeline() {
       </div>
       <div className="flex flex-row mt-4 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
         {tasks.length === 0 && (
-        <span className="p-4 w-full text-center text-gray-400">No task found. Register one to get started!</span>
+          <span className="p-4 w-full text-center text-gray-400">No task found. Register one to get started!</span>
         )}
         {tasks.length > 0 && (
         <>
@@ -81,7 +84,7 @@ function TaskTimeline() {
             ))}
           </aside>
 
-          <ScrollContainer className="TaskTimeline flex flex-col w-full">
+          <TaskTimelineContainer container={container} className="TaskTimeline flex flex-col w-full">
             {months !== null && (
               <>
                 <header className="flex flex-row w-max items-center h-14 px-4 border-b-2 border-gray-200 dark:border-gray-700">
@@ -115,12 +118,12 @@ function TaskTimeline() {
                 </div>
               </>
             )}
-          </ScrollContainer>
+          </TaskTimelineContainer>
         </>
         )}
       </div>
     </>
   );
-}
+};
 
 export default TaskTimeline;

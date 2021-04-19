@@ -6,6 +6,9 @@ import { useDatabase } from './database';
 import TaskModel from '../models/Task';
 import sortTaskList from '../utils/sortTaskList';
 
+// Models
+import ProjectModel from '../models/Project';
+
 export type Task = {
   id?: string;
   name: string;
@@ -16,13 +19,17 @@ export type Task = {
 
 interface ProjectContextProps {
   tasks: Task[];
+  project: ProjectModel;
   setTasks: (arg0: Task[]) => void;
+  setProject: (arg0: ProjectModel) => void;
   addNewTask: (task: Task, project_id: string) => void;
+  getAndSetProjectDataFromId: (project_id: string) => Promise<boolean>;
 }
 
 const ProjectContext = createContext<ProjectContextProps>({} as ProjectContextProps);
 
 const ProjectProvider: React.FC = ({ children }) => {
+  const [project, setProject] = useState<ProjectModel>({} as ProjectModel);
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const { database } = useDatabase();
@@ -41,11 +48,27 @@ const ProjectProvider: React.FC = ({ children }) => {
     });
   }
 
+  async function getAndSetProjectDataFromId(project_id: string): Promise<boolean> {
+    try {
+      const projectData = await database.get<ProjectModel>('projects').find(project_id);
+      const projectTasks = await projectData.tasks.fetch();
+
+      setProject(projectData);
+      setTasks(sortTaskList(projectTasks));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   return (
     <ProjectContext.Provider value={{
       tasks,
+      project,
       setTasks,
+      setProject,
       addNewTask,
+      getAndSetProjectDataFromId,
     }}
     >
       {children}
