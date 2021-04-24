@@ -6,6 +6,7 @@ import Create from './pages/Create';
 import Project from './pages/Project';
 import Settings from './pages/Settings';
 import ProjectSettings from './pages/ProjectSettings';
+import Export from './pages/Export';
 
 function Routes() {
   // Load theme
@@ -19,6 +20,7 @@ function Routes() {
         <Route path="/project/:id" component={Project} />
         <Route path="/settings" exact component={Settings} />
         <Route path="/settings/:id" component={ProjectSettings} />
+        <Route path="/export/:id" component={Export} />
       </Switch>
     </BrowserRouter>
   );

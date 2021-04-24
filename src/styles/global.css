@@ -16,19 +16,18 @@ div#root {
   align-items: center;
 }
 
-button.button {
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 100%;
   padding: 12px;
   border-radius: 8px;
   background-color: var(--primary-purple);
   font-size: 1rem;
   transition: all 0.2s;
 }
-button.button:hover {
+.button:hover {
   filter: brightness(0.8);
 }
 

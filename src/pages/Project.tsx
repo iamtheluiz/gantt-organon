@@ -2,7 +2,6 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { FiDownload, FiPlus } from 'react-icons/fi';
 import { VscSymbolColor } from 'react-icons/vsc';
-// import html2canvas from 'html2canvas';
 
 // Components
 import { CirclePicker, SketchPicker } from 'react-color';
@@ -23,6 +22,7 @@ function Project() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [color, setColor] = useState('#00bcd4');
+  const [daySize, setDaySize] = useState(1.2);
 
   const { id: project_id } = useParams<{ id: string }>();
 
@@ -30,8 +30,18 @@ function Project() {
   const history = useHistory();
 
   useEffect(() => {
-    getAndSetProjectDataFromId(project_id);
-  }, []);
+    async function setProjectData() {
+      // If project isn't already loaded
+      if (project.id !== project_id) {
+        const success = await getAndSetProjectDataFromId(project_id);
+
+        if (!success) {
+          history.push('/');
+        }
+      }
+    }
+    setProjectData();
+  }, [project_id]);
 
   function toggleModal() {
     setModalIsOpen(!modalIsOpen);
@@ -167,7 +177,16 @@ function Project() {
                 </div>
               </header>
 
-              <TaskTimeline container="scroll" />
+              <div className="w-full flex flex-row-reverse pt-4">
+                <select value={daySize} onChange={(event) => setDaySize(Number(event.currentTarget.value))}>
+                  <option value={0.8}>80%</option>
+                  <option value={0.9}>90%</option>
+                  <option value={1}>100%</option>
+                  <option value={1.1}>110%</option>
+                  <option value={1.2}>120%</option>
+                </select>
+              </div>
+              <TaskTimeline container="scroll" daySize={daySize} />
             </main>
           </>
         )}

@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({
 }) => (
   <header className="flex justify-center w-full bg-white dark:bg-gray-800 shadow-md">
     <div className="max-w-screen-2xl w-full flex justify-between p-4">
-      <div className="flex items-center">
+      <div className="flex flex-1 items-center">
         <Link to={backTo} className="linkHover w-7 flex justify-center items-center">
           <FiArrowLeft className="w-full h-full text-gray-700 dark:text-gray-300" />
         </Link>
