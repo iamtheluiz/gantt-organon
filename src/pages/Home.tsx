@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { FiPlus, FiSettings } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
+import { FiPlus } from 'react-icons/fi';
 import { AiOutlineSchedule } from 'react-icons/ai';
 import { useDatabase } from '../contexts/database';
 
 import ProjectItem from '../components/ProjectItem';
 
 import '../styles/pages/Home.css';
+import SimpleHeader from '../components/SimpleHeader';
 
 function Home() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -31,9 +32,9 @@ function Home() {
 
   return (
     <div className="relative flex justify-center items-center dark:bg-black w-full min-h-screen h-full">
-      <Link to="/settings" className="linkHover absolute top-4 right-4 w-7 flex justify-center items-center">
-        <FiSettings className="w-full h-full text-gray-700 dark:text-gray-300" />
-      </Link>
+      <div className="absolute w-full top-0 left-0 px-4">
+        <SimpleHeader showSettings />
+      </div>
       <section id="home" className="flex justify-center items-center flex-col w-full max-w-xl p-4">
         <header className="text-center w-full">
           <div className="flex flex-row items-center justify-center mb-2">

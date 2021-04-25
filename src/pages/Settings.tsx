@@ -1,26 +1,23 @@
 import React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
+import SimpleActionButton from '../components/SimpleActionButton';
+import SimpleHeader from '../components/SimpleHeader';
 import useDarkTheme from '../hooks/useDarkTheme';
 
 import '../styles/pages/Create.css';
 
 const Settings: React.FC = ({ children }) => {
   const { darkTheme, setDarkTheme } = useDarkTheme();
-  const history = useHistory();
 
-  function handleReturnToPreviousPage() {
-    history.goBack();
-  }
+  const history = useHistory();
 
   return (
     <div className="flex justify-center items-center dark:bg-black w-full min-h-screen h-full">
       <section id="settings" className="max-w-sm w-full px-4">
-        <header className="w-full py-4 rounded-lg">
-          <button onClick={handleReturnToPreviousPage} className="linkHover w-7 flex justify-center items-center">
-            <FiArrowLeft className="w-full h-full text-gray-700 dark:text-gray-300" />
-          </button>
-        </header>
+        <SimpleHeader showSettings>
+          <SimpleActionButton icon={FiArrowLeft} onClick={() => history.goBack()} />
+        </SimpleHeader>
         <div className="w-full pt-4 pb-6">
           <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-300">Settings</h1>
           <div className="input-field flex flex-col py-2">

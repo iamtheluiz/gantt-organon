@@ -1,13 +1,20 @@
 import { FormEvent, useState } from 'react';
-import { FiArrowLeft } from 'react-icons/fi';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Picker } from 'emoji-mart';
+
+// Components
+import SimpleHeader from '../components/SimpleHeader';
+
+// Utilities
 import getFormInputValues from '../utils/getFormInputValues';
 
+// Contexts
 import { useDatabase } from '../contexts/database';
 
+// Models
 import ProjectModel from '../models/Project';
 
+// Styles
 import '../styles/pages/Create.css';
 import 'emoji-mart/css/emoji-mart.css';
 
@@ -41,11 +48,7 @@ function Create() {
   return (
     <div className="background absolute dark:bg-black flex justify-center items-center w-full min-h-screen overflow-y-auto px-4">
       <section id="create" className="max-w-lg w-full px-4">
-        <header className="w-full py-4 rounded-lg">
-          <Link to="/" className="linkHover w-7 flex justify-center items-center">
-            <FiArrowLeft className="w-full h-full text-gray-700 dark:text-gray-300" />
-          </Link>
-        </header>
+        <SimpleHeader backTo="/" />
         <form onSubmit={handleFormSubmit}>
           <div className="w-full pt-4 pb-6">
             <div className="flex flex-row items-center">

@@ -31,14 +31,6 @@ div#root {
   filter: brightness(0.8);
 }
 
-.linkHover svg {
-  transition: all 0.2s;
-}
-.linkHover:hover svg {
-  color: var(--primary-purple) !important;
-  transform: scale(1.2);
-}
-
 /* Scroll */
 ::-webkit-scrollbar {
   width: 4px;

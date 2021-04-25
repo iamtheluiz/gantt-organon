@@ -2,6 +2,8 @@ import React from 'react';
 import { FiX } from 'react-icons/fi';
 
 import '../styles/components/Modal.css';
+import SimpleActionButton from './SimpleActionButton';
+import SimpleHeader from './SimpleHeader';
 
 interface ProjectProps {
   modalIsOpen: boolean;
@@ -19,11 +21,9 @@ const Project: React.FC<ProjectProps> = ({ children, modalIsOpen, setModalIsOpen
       {modalIsOpen && (
         <div id="Modal" className="absolute -inset-0 flex items-center justify-center w-full min-h-screen overflow-y-auto dark:bg-black z-30">
           <div className="max-w-lg w-full px-4">
-            <header className="w-full py-4 rounded-lg">
-              <button onClick={toggleModal} className="linkHover w-7 flex justify-center items-center">
-                <FiX className="w-full h-full text-gray-700 dark:text-gray-300" />
-              </button>
-            </header>
+            <SimpleHeader>
+              <SimpleActionButton icon={FiX} onClick={toggleModal} />
+            </SimpleHeader>
             {children}
           </div>
         </div>
