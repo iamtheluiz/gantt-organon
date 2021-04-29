@@ -17,6 +17,7 @@ import { useProject } from '../contexts/project';
 
 // Styles
 import '../styles/pages/Project.css';
+import InputField from '../components/form/InputField';
 
 function Project() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -77,16 +78,13 @@ function Project() {
         <form onSubmit={handleSubmitNewTask}>
           <div className="w-full pt-4 pb-6">
             <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-300">Create new Task</h1>
-            <div className="input-field flex flex-col py-2">
-              <label htmlFor="name" className="pb-1 text-base font-medium text-gray-800 dark:text-gray-300">Name</label>
-              <input
-                className="placeholder-gray-600 dark:placeholder-gray-400 border-gray-500 border-b-2 text-base text-gray-500 dark:text-gray-300 px-2.5 py-3.5 bg-transparent"
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Ex: Planning"
-              />
-            </div>
+            <InputField
+              id="name"
+              name="name"
+              placeholder="Ex: Planning"
+              label="Title"
+              required
+            />
             <div className="input-field flex flex-col py-2">
               <label htmlFor="color" className="pb-1 text-base font-medium text-gray-800 dark:text-gray-300">Color</label>
               <div className="h-full flex flex-row md:flex-col justify-around items-center">
@@ -113,24 +111,20 @@ function Project() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <div className="input-field flex flex-col py-2">
-                <label htmlFor="start" className="pb-1 text-base font-medium text-gray-800 dark:text-gray-300">Start</label>
-                <input
-                  className="placeholder-gray-600 dark:placeholder-gray-400 border-gray-500 border-b-2 text-base text-gray-500 dark:text-gray-300 px-2.5 py-3.5 bg-transparent"
-                  type="date"
-                  id="start"
-                  name="start"
-                />
-              </div>
-              <div className="input-field flex flex-col py-2">
-                <label htmlFor="end" className="pb-1 text-base font-medium text-gray-800 dark:text-gray-300">End</label>
-                <input
-                  className="placeholder-gray-600 dark:placeholder-gray-400 border-gray-500 border-b-2 text-base text-gray-500 dark:text-gray-300 px-2.5 py-3.5 bg-transparent"
-                  type="date"
-                  id="end"
-                  name="end"
-                />
-              </div>
+              <InputField
+                id="start"
+                name="start"
+                type="date"
+                label="Start"
+                required
+              />
+              <InputField
+                id="end"
+                name="end"
+                type="date"
+                label="End"
+                required
+              />
             </div>
           </div>
           <footer className="grid grid-cols-2 gap-2">

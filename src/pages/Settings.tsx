@@ -15,7 +15,7 @@ const Settings: React.FC = ({ children }) => {
   return (
     <div className="flex justify-center items-center dark:bg-black w-full min-h-screen h-full">
       <section id="settings" className="max-w-sm w-full px-4">
-        <SimpleHeader showSettings>
+        <SimpleHeader>
           <SimpleActionButton icon={FiArrowLeft} onClick={() => history.goBack()} />
         </SimpleHeader>
         <div className="w-full pt-4 pb-6">

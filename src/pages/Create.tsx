@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Picker } from 'emoji-mart';
 
 // Components
+import InputField from '../components/form/InputField';
 import SimpleHeader from '../components/SimpleHeader';
 
 // Utilities
@@ -53,11 +54,7 @@ function Create() {
           <div className="w-full pt-4 pb-6">
             <div className="flex flex-row items-center">
               <div className="relative input-field flex flex-col py-2">
-                <button
-                  type="button"
-                  className="text-3xl mr-2"
-                  onClick={() => setEmojiMenuIsOpen(!emojiMenuIsOpen)}
-                >
+                <button type="button" className="text-3xl mr-2" onClick={() => setEmojiMenuIsOpen(!emojiMenuIsOpen)}>
                   {selectedEmoji}
                 </button>
                 <Picker
@@ -73,39 +70,24 @@ function Create() {
                   }}
                   showPreview={false}
                 />
-                <input
-                  type="hidden"
-                  id="emoji"
-                  name="emoji"
-                  placeholder="Ex: Rocket"
-                  value={selectedEmoji}
-                  required
-                />
+                <input type="hidden" id="emoji" name="emoji" placeholder="Ex: Rocket" value={selectedEmoji} required />
               </div>
               <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-300">Create new Project</h1>
             </div>
-            <div className="input-field flex flex-1 flex-col py-2">
-              <label htmlFor="title" className="pb-1 text-base font-medium text-gray-800 dark:text-gray-400">Title</label>
-              <input
-                className="placeholder-gray-400 border-gray-500 border-b-2 text-base px-2.5 py-3.5"
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Ex: Rocket"
-                required
-              />
-            </div>
-            <div className="input-field flex flex-col py-2">
-              <label htmlFor="title" className="pb-1 text-base font-medium text-gray-800 dark:text-gray-400">Subtitle</label>
-              <input
-                className="placeholder-gray-400 border-gray-500 border-b-2 text-base px-2.5 py-3.5"
-                type="text"
-                id="subtitle"
-                name="subtitle"
-                placeholder="Ex: Send rockets to mars"
-                required
-              />
-            </div>
+            <InputField
+              id="title"
+              name="title"
+              placeholder="Ex: Rocket"
+              label="Title"
+              required
+            />
+            <InputField
+              id="subtitle"
+              name="subtitle"
+              placeholder="Ex: Send rockets to mars"
+              label="Subtitle"
+              required
+            />
           </div>
           <footer className="grid grid-cols-2 gap-2">
             <button
