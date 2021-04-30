@@ -1,13 +1,3 @@
-@keyframes fade {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-section#project {
-  animation: fade 0.2s infinite;
-  animation-iteration-count: 1;
-}
-
 section#project > header div#logo {
   background-color: #a143b4;
 }

@@ -5,7 +5,7 @@ import getDayCount from '../utils/getDayCount';
 interface TaskItemProps {
   task: Task;
   daySize: number;
-  firstTimelineDay: Date | null;
+  firstTimelineDay?: Date | undefined;
   tabIndex: number;
 }
 
@@ -24,7 +24,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
 
   useEffect(() => {
     // Offset
-    if (firstTimelineDay !== null) {
+    if (firstTimelineDay !== undefined) {
       const dayCount: number = getDayCount(firstTimelineDay, task.start);
 
       setOffset((dayCount * daySize) - daySize);
@@ -38,7 +38,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
     <div
       key={task.name}
       className="relative flex flex-col items-center text-lef h-14 py-0.5"
-      style={{ width: `${width}rem`, marginLeft: `${offset}rem` }}
+      style={daySize !== 0 ? { width: `${width}rem`, marginLeft: `${offset}rem` } : { width: '100%' }}
     >
       <div
         className="w-full h-full flex flex-col justify-center px-3 rounded-md transition-all"
@@ -50,7 +50,8 @@ const TaskItem: React.FC<TaskItemProps> = ({
       >
         <strong className="text-sm text-gray-800">{task.name}</strong>
         <span className="text-xs text-gray-700">
-          {`${task.start.toLocaleDateString()} - ${task.end.toLocaleDateString()}`}
+          {`${task.start.toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' })} - 
+          ${task.end.toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' })}`}
         </span>
       </div>
     </div>

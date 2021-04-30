@@ -89,7 +89,7 @@ function Create() {
               required
             />
           </div>
-          <footer className="grid grid-cols-2 gap-2">
+          <footer className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <button
               className="button text-gray-800 dark:text-gray-600"
               type="reset"

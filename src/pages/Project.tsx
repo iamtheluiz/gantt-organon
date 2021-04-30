@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { FiDownload, FiPlus } from 'react-icons/fi';
+import { FiDownload, FiPlus, FiX } from 'react-icons/fi';
 import { VscSymbolColor } from 'react-icons/vsc';
 
 // Components
@@ -8,6 +8,10 @@ import { CirclePicker, SketchPicker } from 'react-color';
 import Header from '../components/Header';
 import TaskTimeline from '../components/TaskTimeline';
 import Modal from '../components/Modal';
+import InputField from '../components/form/InputField';
+import TaskItem from '../components/TaskItem';
+import SimpleHeader from '../components/SimpleHeader';
+import SimpleActionButton from '../components/SimpleActionButton';
 
 // Utilities
 import getFormInputValues from '../utils/getFormInputValues';
@@ -17,11 +21,11 @@ import { useProject } from '../contexts/project';
 
 // Styles
 import '../styles/pages/Project.css';
-import InputField from '../components/form/InputField';
 
 function Project() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
+  const [title, setTitle] = useState('');
   const [color, setColor] = useState('#00bcd4');
   const [daySize, setDaySize] = useState(1.2);
 
@@ -74,23 +78,18 @@ function Project() {
 
   return (
     <>
-      <Modal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+      <Modal modalIsOpen={modalIsOpen}>
+        <SimpleHeader>
+          <h1 className="text-3xl font-semibold text-gray-700 dark:text-gray-300">Create new Task</h1>
+          <SimpleActionButton icon={FiX} onClick={() => setModalIsOpen(!modalIsOpen)} />
+        </SimpleHeader>
         <form onSubmit={handleSubmitNewTask}>
-          <div className="w-full pt-4 pb-6">
-            <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-300">Create new Task</h1>
-            <InputField
-              id="name"
-              name="name"
-              placeholder="Ex: Planning"
-              label="Title"
-              required
-            />
-            <div className="input-field flex flex-col py-2">
-              <label htmlFor="color" className="pb-1 text-base font-medium text-gray-800 dark:text-gray-300">Color</label>
-              <div className="h-full flex flex-row md:flex-col justify-around items-center">
+          <div className="w-full pb-6">
+            <div className="flex flex-row w-full">
+              <div className="flex flex-row md:flex-col justify-around items-center pr-2">
                 <input type="hidden" name="color" value={color} />
                 <button
-                  className="h-24 w-24 flex justify-center items-center md:w-full md:h-12 rounded-md"
+                  className="w-24 px-2 flex justify-center items-center md:w-full md:h-12 rounded-md"
                   type="button"
                   style={{ backgroundColor: color }}
                   onClick={toggleColorModal}
@@ -101,15 +100,35 @@ function Project() {
                   <CirclePicker color={color} onChange={(value) => setColor(value.hex)} />
                 </div>
                 {colorModalIsOpen && (
-                  <Modal
-                    modalIsOpen={colorModalIsOpen}
-                    setModalIsOpen={setColorModalIsOpen}
-                  >
-                    <SketchPicker color={color} onChange={(value) => setColor(value.hex)} />
-                  </Modal>
+                <Modal
+                  modalIsOpen={colorModalIsOpen}
+                >
+                  <SimpleHeader>
+                    <SimpleActionButton icon={FiX} onClick={() => setColorModalIsOpen(!colorModalIsOpen)} />
+                  </SimpleHeader>
+                  <SketchPicker color={color} onChange={(value) => setColor(value.hex)} />
+                </Modal>
                 )}
               </div>
+              <div className="flex flex-1">
+                <TaskItem
+                  task={{
+                    name: title || 'Planning', start: new Date(), end: new Date(), color,
+                  }}
+                  tabIndex={-1}
+                  daySize={0}
+                />
+              </div>
             </div>
+            <InputField
+              id="name"
+              name="name"
+              placeholder="Ex: Planning"
+              label="Title"
+              value={title}
+              onChange={(event) => setTitle(event.currentTarget.value)}
+              required
+            />
             <div className="grid grid-cols-2 gap-2">
               <InputField
                 id="start"
@@ -127,7 +146,7 @@ function Project() {
               />
             </div>
           </div>
-          <footer className="grid grid-cols-2 gap-2">
+          <footer className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <button
               className="button text-gray-800 dark:text-gray-600"
               type="reset"
