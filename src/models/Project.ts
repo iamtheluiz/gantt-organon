@@ -8,11 +8,14 @@ export default class ProjectModel extends Model {
     tasks: { type: 'has_many', foreignKey: 'project_id' },
   };
 
-  @field('title') title: string | undefined
+  @field('title')
+  title!: string;
 
-  @field('subtitle') subtitle: string | undefined
+  @field('subtitle')
+  subtitle!: string;
 
-  @field('emoji') emoji: string | undefined
+  @field('emoji')
+  emoji!: string;
 
   @children('tasks') tasks: any;
 }

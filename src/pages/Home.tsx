@@ -8,15 +8,16 @@ import ProjectItem from '../components/ProjectItem';
 
 import '../styles/pages/Home.css';
 import SimpleHeader from '../components/SimpleHeader';
+import ProjectModel from '../models/Project';
 
 function Home() {
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<ProjectModel[]>([]);
   const history = useHistory();
   const { database } = useDatabase();
 
   useEffect(() => {
     async function getProjects() {
-      setProjects(await database.get('projects').query().fetch());
+      setProjects(await database.get<ProjectModel>('projects').query().fetch());
     }
 
     getProjects();

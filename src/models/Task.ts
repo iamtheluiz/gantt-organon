@@ -5,13 +5,17 @@ import ProjectModel from './Project';
 export default class TaskModel extends Model {
   static table = 'tasks'
 
-  @field('name') name: string | undefined
+  @field('name')
+  name!: string;
 
-  @field('color') color: string | undefined
+  @field('color')
+  color!: string;
 
-  @date('start') start: Date | undefined
+  @date('start')
+  start!: Date;
 
-  @date('end') end: Date | undefined
+  @date('end')
+  end!: Date;
 
   @relation('projects', 'project_id') project!: ProjectModel;
 }
