@@ -65,13 +65,17 @@ function Export() {
   }
 
   return (
-    <section id="project" className="toCanvas flex flex-col items-center w-full min-h-screen dark:bg-black">
+    <section id="project" className="flex flex-col items-center w-full min-h-screen">
       <Header
         projectId={project.id}
-        backTo="/"
+        backTo={`/project/${project.id}`}
       >
         <div className="flex w-full flex-1 px-4">
-          <div id="logo" className="flex justify-center items-center h-10 w-10 rounded-md">
+          <div
+            id="logo"
+            className="flex justify-center items-center h-10 w-10 rounded-md"
+            style={{ backgroundColor: 'var(--primary-purple)' }}
+          >
             {project.emoji}
           </div>
           <div className="ml-2 flex flex-1 flex-col justify-center">
@@ -88,7 +92,7 @@ function Export() {
         <div className="w-full p-3">
           <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-300">Preview</h1>
         </div>
-        <div ref={timelineRef} className="toCanvas w-max p-3" style={{ backgroundColor: 'var(--light-background)' }}>
+        <div ref={timelineRef} className="toCanvas w-max p-3 dark:bg-black">
           <div className="flex flex-row">
             <div
               className="flex justify-center items-center h-10 w-10 ml-0 rounded-md"
@@ -97,8 +101,8 @@ function Export() {
               {project.emoji}
             </div>
             <div className="ml-2 flex flex-col justify-center">
-              <h1 className="font-serif text-base">{project.title}</h1>
-              <span className="text-sm font-light">{project.subtitle}</span>
+              <h1 className="font-serif text-base dark:text-gray-300">{project.title}</h1>
+              <span className="text-sm font-light dark:text-gray-300">{project.subtitle}</span>
             </div>
           </div>
           <TaskTimeline container="div" />

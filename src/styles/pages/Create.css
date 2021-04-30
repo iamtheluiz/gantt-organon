@@ -3,11 +3,6 @@
   to {opacity: 1;}
 }
 
-div.background {
-  animation: fade 0.2s infinite;
-  animation-iteration-count: 1;
-}
-
 section#create header a svg {
   transition: all 0.2s;
 }

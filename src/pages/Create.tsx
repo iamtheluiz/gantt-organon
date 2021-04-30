@@ -47,7 +47,7 @@ function Create() {
   }
 
   return (
-    <div className="background absolute dark:bg-black flex justify-center items-center w-full min-h-screen overflow-y-auto px-4">
+    <div className="flex justify-center items-center w-full min-h-screen overflow-y-auto px-4">
       <section id="create" className="max-w-lg w-full px-4">
         <SimpleHeader backTo="/" />
         <form onSubmit={handleFormSubmit}>

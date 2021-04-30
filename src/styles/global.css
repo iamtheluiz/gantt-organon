@@ -8,12 +8,16 @@ body, div#root {
   --light-background: #f4f5fb;
   --primary-purple: #a143b4;
   min-height: 100vh;
-  background-color: var(--light-background);
+  width: 100%;
 }
 div#root {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--light-background);
+}
+body.dark div#root {
+  background-color: black;
 }
 
 .button {
