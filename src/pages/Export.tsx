@@ -82,7 +82,7 @@ function Export() {
             <h1 className="font-serif text-base dark:text-gray-300">{project.title}</h1>
             <span className="text-sm font-light dark:text-gray-300">{project.subtitle}</span>
           </div>
-          <button className="button w-36 h-full flex justify-center items-center shadow-md" onClick={handleDownloadImage}>
+          <button className="button primary w-36 h-full flex justify-center items-center shadow-md" onClick={handleDownloadImage}>
             <FiDownload color="#fff" size={18} />
             <span className="text-sm ml-1 text-white">Download</span>
           </button>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { useProject } from '../contexts/project';
 
@@ -14,7 +15,8 @@ interface TaskTimelineProps {
 }
 
 const TaskTimeline: React.FC<TaskTimelineProps> = ({ container = 'scroll', daySize = 1.2 }) => {
-  const { tasks, months } = useProject();
+  const history = useHistory();
+  const { project, tasks, months } = useProject();
 
   return (
     <>
@@ -55,6 +57,9 @@ const TaskTimeline: React.FC<TaskTimelineProps> = ({ container = 'scroll', daySi
                         daySize={daySize}
                         firstTimelineDay={months[0].date}
                         tabIndex={index + 5}
+                        onClick={() => {
+                          history.push(`/project/${project.id}/task/${task.id}`);
+                        }}
                       />
                     ))}
                   </div>

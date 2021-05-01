@@ -97,7 +97,7 @@ function Create() {
             >
               Clear
             </button>
-            <button className="button text-white" type="submit">Create</button>
+            <button className="button primary text-white" type="submit">Create</button>
           </footer>
         </form>
       </section>

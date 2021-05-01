@@ -64,11 +64,11 @@ function Project() {
 
           <header className="flex flex-row-reverse">
             <div className="flex flex-row gap-2">
-              <button className="button max-w-max flex justify-center items-center shadow-md" onClick={handleExportDiagram}>
+              <button className="button primary max-w-max flex justify-center items-center shadow-md" onClick={handleExportDiagram}>
                 <FiDownload color="#fff" size={18} />
                 <span className="text-sm ml-1 text-white">Export</span>
               </button>
-              <button className="button max-w-max flex justify-center items-center shadow-md" onClick={handleNavigateToNewTask}>
+              <button className="button primary max-w-max flex justify-center items-center shadow-md" onClick={handleNavigateToNewTask}>
                 <FiPlus color="#fff" size={18} />
                 <span className="text-sm ml-1 text-white">Add Task</span>
               </button>

@@ -1,30 +1,52 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-// Components
 import { FiX } from 'react-icons/fi';
 import { VscSymbolColor } from 'react-icons/vsc';
+
+// Components
 import { CirclePicker, SketchPicker } from 'react-color';
 import InputField from '../components/form/InputField';
 import SimpleHeader from '../components/SimpleHeader';
-
-// Styles
-import '../styles/pages/Create.css';
-import 'emoji-mart/css/emoji-mart.css';
-import getFormInputValues from '../utils/getFormInputValues';
-import { useProject } from '../contexts/project';
 import SimpleActionButton from '../components/SimpleActionButton';
 import Modal from '../components/Modal';
 import TaskItem from '../components/TaskItem';
 
+// Contexts
+import { Task, useProject } from '../contexts/project';
+
+// Styles
+import '../styles/pages/Create.css';
+import 'emoji-mart/css/emoji-mart.css';
+
 function NewTask() {
+  const defaultDate = new Date(new Date().setHours(0, 0, 0, 0));
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [color, setColor] = useState('#00bcd4');
+  const [start, setStart] = useState(defaultDate);
+  const [end, setEnd] = useState(defaultDate);
   const { id: project_id } = useParams<{ id: string }>();
 
-  const { addNewTask } = useProject();
+  const {
+    getTaskData, addNewTask, editTask, removeTask,
+  } = useProject();
+  const { task_id } = useParams<{ task_id?: string }>();
   const history = useHistory();
+
+  useEffect(() => {
+    async function setTaskData(id: string) {
+      const taskData = await getTaskData(id);
+
+      setTitle(taskData.name);
+      setColor(taskData.color);
+      setStart(taskData.start);
+      setEnd(taskData.end);
+    }
+    if (task_id) {
+      setTaskData(task_id);
+    }
+  }, []);
 
   function toggleColorModal() {
     setColorModalIsOpen(!colorModalIsOpen);
@@ -34,18 +56,30 @@ function NewTask() {
     history.push(`/project/${project_id}`);
   }
 
+  async function handleRemoveTask() {
+    if (task_id) {
+      const taskData = await getTaskData(task_id);
+
+      await removeTask(taskData);
+      history.push(`/project/${project_id}`);
+    }
+  }
+
   function handleSubmitNewTask(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const form = event.currentTarget;
-    const formData = getFormInputValues(form);
+    const task: Task = {
+      name: title,
+      color,
+      start,
+      end,
+    };
 
-    addNewTask({
-      name: formData.name,
-      color: formData.color,
-      start: new Date(formData.start.split('-').join('/')),
-      end: new Date(formData.end.split('-').join('/')),
-    }, project_id);
+    if (!task_id) {
+      addNewTask(task, project_id);
+    } else {
+      editTask(task, task_id);
+    }
 
     returnToProjectPage();
   }
@@ -54,7 +88,9 @@ function NewTask() {
     <div className="flex justify-center items-center w-full min-h-screen overflow-y-auto px-4">
       <section id="create" className="max-w-lg w-full px-4">
         <SimpleHeader>
-          <h1 className="text-3xl font-semibold text-gray-700 dark:text-gray-300">Create new Task</h1>
+          <h1 className="text-3xl font-semibold text-gray-700 dark:text-gray-300">
+            {!task_id ? 'Create new Task' : 'Edit Task'}
+          </h1>
           <SimpleActionButton icon={FiX} onClick={returnToProjectPage} />
         </SimpleHeader>
         <form onSubmit={handleSubmitNewTask}>
@@ -88,7 +124,7 @@ function NewTask() {
               <div className="flex flex-1">
                 <TaskItem
                   task={{
-                    name: title || 'Planning', start: new Date(), end: new Date(), color,
+                    name: title || 'Planning', start, end, color,
                   }}
                   tabIndex={-1}
                   daySize={0}
@@ -110,6 +146,8 @@ function NewTask() {
                 name="start"
                 type="date"
                 label="Start"
+                value={start.toISOString().split('T')[0]}
+                onChange={(event) => setStart(new Date(`${event.currentTarget.value} 00:00`))}
                 required
               />
               <InputField
@@ -117,19 +155,34 @@ function NewTask() {
                 name="end"
                 type="date"
                 label="End"
+                value={end.toISOString().split('T')[0]}
+                onChange={(event) => setEnd(new Date(`${event.currentTarget.value} 00:00`))}
                 required
               />
             </div>
           </div>
           <footer className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <button
-              className="button text-gray-800 dark:text-gray-600"
-              type="reset"
-              style={{ backgroundColor: '#dde9f3' }}
-            >
-              Clear
+            {!task_id ? (
+              <button
+                className="button text-gray-800 dark:text-gray-600"
+                type="reset"
+                style={{ backgroundColor: '#dde9f3' }}
+              >
+                Clear
+              </button>
+            ) : (
+              <button
+                className="button bg-red-500 text-white"
+                type="button"
+                onClick={handleRemoveTask}
+              >
+                Remove
+              </button>
+            )}
+
+            <button className="button primary text-white" type="submit">
+              {!task_id ? 'Create' : 'Save'}
             </button>
-            <button className="button text-white" type="submit">Create</button>
           </footer>
         </form>
       </section>

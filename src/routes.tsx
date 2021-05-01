@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import useDarkTheme from './hooks/useDarkTheme';
 
 import { AnimatedRoutes, RouteTransition } from './components/AnimatedRoutes';
@@ -16,13 +16,16 @@ function Routes() {
   useDarkTheme();
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AnimatedRoutes exitBeforeEnter initial={false}>
         <RouteTransition path="/" exact>
           <Home />
         </RouteTransition>
         <RouteTransition path="/create" exact>
           <Create />
+        </RouteTransition>
+        <RouteTransition path="/project/:id/task/:task_id" slideUp={80}>
+          <NewTask />
         </RouteTransition>
         <RouteTransition path="/project/:id/task" slideUp={80}>
           <NewTask />
@@ -40,7 +43,7 @@ function Routes() {
           <Export />
         </RouteTransition>
       </AnimatedRoutes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

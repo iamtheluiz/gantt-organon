@@ -7,10 +7,11 @@ interface TaskItemProps {
   daySize: number;
   firstTimelineDay?: Date | undefined;
   tabIndex: number;
+  onClick?: () => void;
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({
-  task, daySize, firstTimelineDay, tabIndex,
+  task, daySize, firstTimelineDay, tabIndex, onClick = () => {},
 }) => {
   const [width, setWidth] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -31,9 +32,6 @@ const TaskItem: React.FC<TaskItemProps> = ({
     }
   }, [firstTimelineDay, daySize]);
 
-  function handleToggleOptionsMenu() {
-  }
-
   return (
     <div
       key={task.name}
@@ -43,13 +41,13 @@ const TaskItem: React.FC<TaskItemProps> = ({
       <div
         className="w-full h-full flex flex-col justify-center px-3 rounded-md transition-all"
         style={{ backgroundColor: task.color }}
-        onClick={handleToggleOptionsMenu}
-        onKeyDown={handleToggleOptionsMenu}
+        onClick={onClick}
+        onKeyDown={onClick}
         role="button"
         tabIndex={tabIndex}
       >
-        <strong className="text-sm text-gray-800">{task.name}</strong>
-        <span className="text-xs text-gray-700">
+        <strong className="text-sm text-gray-800 whitespace-nowrap overflow-hidden overflow-ellipsis">{task.name}</strong>
+        <span className="text-xs text-gray-700 whitespace-nowrap overflow-hidden overflow-ellipsis">
           {`${task.start.toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' })} - 
           ${task.end.toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' })}`}
         </span>

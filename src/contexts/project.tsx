@@ -27,7 +27,10 @@ interface ProjectContextProps {
   setTasks: (arg0: Task[]) => void;
   setMonths: (arg0: Month[]) => void;
   setProject: (arg0: ProjectModel) => void;
+  getTaskData: (id: string) => Promise<TaskModel>;
   addNewTask: (task: Task, project_id: string) => void;
+  editTask: (task: Task, task_id: string) => void;
+  removeTask: (task: TaskModel) => Promise<void>;
   getAndSetProjectDataFromId: (project_id: string) => Promise<boolean>;
 }
 
@@ -47,17 +50,44 @@ const ProjectProvider: React.FC = ({ children }) => {
     }
   }, [tasks]);
 
-  async function addNewTask(task: Task, project_id: string) {
-    setTasks(sortTaskList([...tasks, task]));
+  async function getTaskData(id: string) {
+    const taskData = await database.get<TaskModel>('tasks').find(id);
 
+    return taskData;
+  }
+
+  async function addNewTask(task: Task, project_id: string) {
     await database.action(async () => {
-      await database.get<TaskModel>('tasks').create((newTask) => {
+      const createdTask = await database.get<TaskModel>('tasks').create((newTask) => {
         newTask.name = task.name;
         newTask.color = task.color;
         newTask.start = task.start;
         newTask.end = task.end;
         newTask.project.id = project_id;
       });
+
+      setTasks(sortTaskList([...tasks, createdTask]));
+    });
+  }
+
+  async function editTask(newTaskData: Task, task_id: string) {
+    await database.action(async () => {
+      const selectedTask = await getTaskData(task_id);
+      await selectedTask.update((taskData) => {
+        taskData.name = newTaskData.name;
+        taskData.color = newTaskData.color;
+        taskData.start = newTaskData.start;
+        taskData.end = newTaskData.end;
+      });
+
+      setTasks(sortTaskList([...tasks]));
+    });
+  }
+
+  async function removeTask(task: TaskModel) {
+    await database.action(async () => {
+      await task.destroyPermanently();
+      setTasks(tasks.filter((item) => task.id !== item.id));
     });
   }
 
@@ -83,7 +113,10 @@ const ProjectProvider: React.FC = ({ children }) => {
       setTasks,
       setMonths,
       setProject,
+      getTaskData,
       addNewTask,
+      editTask,
+      removeTask,
       getAndSetProjectDataFromId,
     }}
     >
