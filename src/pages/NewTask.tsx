@@ -1,11 +1,12 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import { FiX } from 'react-icons/fi';
 import { VscSymbolColor } from 'react-icons/vsc';
 
 // Components
-import { CirclePicker, SketchPicker } from 'react-color';
+import { SketchPicker } from 'react-color';
 import InputField from '../components/form/InputField';
 import SimpleHeader from '../components/SimpleHeader';
 import SimpleActionButton from '../components/SimpleActionButton';
@@ -56,13 +57,40 @@ function NewTask() {
     history.push(`/project/${project_id}`);
   }
 
-  async function handleRemoveTask() {
-    if (task_id) {
-      const taskData = await getTaskData(task_id);
+  // eslint-disable-next-line no-unused-vars
+  function handleDateChange(event: FormEvent<HTMLInputElement>, setValue: (date: any) => void) {
+    try {
+      const { value } = event.currentTarget;
 
-      await removeTask(taskData);
-      history.push(`/project/${project_id}`);
+      setValue(new Date(`${value} 00:00`));
+    } catch (error) {
+      setValue((oldDate: any) => oldDate);
     }
+  }
+
+  function handleRemoveTask() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        if (task_id) {
+          const taskData = await getTaskData(task_id);
+
+          await removeTask(taskData);
+          history.push(`/project/${project_id}`);
+        }
+
+        Swal.fire(
+          'Deleted!',
+          'Task deleted from project',
+          'success',
+        );
+      }
+    });
   }
 
   function handleSubmitNewTask(event: FormEvent<HTMLFormElement>) {
@@ -99,26 +127,23 @@ function NewTask() {
               <div className="flex flex-row md:flex-col justify-around items-center pr-2">
                 <input type="hidden" name="color" value={color} />
                 <button
-                  className="w-24 px-2 flex justify-center items-center md:w-full md:h-12 rounded-md"
+                  className="h-12 w-full px-2 flex justify-center items-center rounded-md"
                   type="button"
                   style={{ backgroundColor: color }}
                   onClick={toggleColorModal}
                 >
                   <VscSymbolColor className="text-gray-200 text-3xl" />
                 </button>
-                <div className="md:hidden">
-                  <CirclePicker color={color} onChange={(value) => setColor(value.hex)} />
-                </div>
                 {colorModalIsOpen && (
-                <Modal
-                  modalIsOpen={colorModalIsOpen}
-                >
-                  <SimpleHeader>
-                    <div />
-                    <SimpleActionButton icon={FiX} onClick={() => setColorModalIsOpen(!colorModalIsOpen)} />
-                  </SimpleHeader>
-                  <SketchPicker color={color} onChange={(value) => setColor(value.hex)} />
-                </Modal>
+                  <Modal
+                    modalIsOpen={colorModalIsOpen}
+                  >
+                    <SimpleHeader>
+                      <div />
+                      <SimpleActionButton icon={FiX} onClick={() => setColorModalIsOpen(!colorModalIsOpen)} />
+                    </SimpleHeader>
+                    <SketchPicker color={color} onChange={(value) => setColor(value.hex)} />
+                  </Modal>
                 )}
               </div>
               <div className="flex flex-1">
@@ -140,14 +165,15 @@ function NewTask() {
               onChange={(event) => setTitle(event.currentTarget.value)}
               required
             />
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-col md:grid md:grid-cols-2 md:gap-2">
               <InputField
                 id="start"
                 name="start"
                 type="date"
                 label="Start"
                 value={start.toISOString().split('T')[0]}
-                onChange={(event) => setStart(new Date(`${event.currentTarget.value} 00:00`))}
+                onChange={(event) => handleDateChange(event, setStart)}
+                onKeyDown={(event) => { event.preventDefault(); }}
                 required
               />
               <InputField
@@ -156,7 +182,8 @@ function NewTask() {
                 type="date"
                 label="End"
                 value={end.toISOString().split('T')[0]}
-                onChange={(event) => setEnd(new Date(`${event.currentTarget.value} 00:00`))}
+                onChange={(event) => handleDateChange(event, setEnd)}
+                onKeyDown={(event) => { event.preventDefault(); }}
                 required
               />
             </div>

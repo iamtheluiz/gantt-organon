@@ -1,6 +1,0 @@
-div#Modal {
-  background-color: var(--light-background);
-}
-body.dark div#Modal {
-  background-color: black;
-}

@@ -1,4 +1,5 @@
 import { useParams, useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import Settings from './Settings';
 
@@ -12,19 +13,33 @@ function ProjectSettings() {
   const { database } = useDatabase();
 
   async function handleDeleteProject() {
-    if (confirm("You really want to delete this project? (there's no turn back)")) {
-      const projectData = await database.get<ProjectModel>('projects').find(project_id);
-      const projectTasks = await projectData.tasks.fetch();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const projectData = await database.get<ProjectModel>('projects').find(project_id);
+        const projectTasks = await projectData.tasks.fetch();
 
-      await database.action(async () => {
-        await projectData.destroyPermanently();
-        projectTasks.map(async (task: any) => {
-          await task.destroyPermanently();
+        await database.action(async () => {
+          await projectData.destroyPermanently();
+          projectTasks.map(async (task: any) => {
+            await task.destroyPermanently();
+          });
         });
-      });
 
-      history.push('/');
-    }
+        Swal.fire(
+          'Deleted!',
+          'Project delete successfully!',
+          'success',
+        );
+
+        history.push('/');
+      }
+    });
   }
 
   return (
