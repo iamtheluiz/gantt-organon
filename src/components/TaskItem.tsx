@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Task } from '../contexts/project';
 import getDayCount from '../utils/getDayCount';
+import getTextColorFromBackgroundColor from '../utils/getTextColorFromBackgroundColor';
 
 interface TaskItemProps {
   task: Task;
@@ -15,6 +16,8 @@ const TaskItem: React.FC<TaskItemProps> = ({
 }) => {
   const [width, setWidth] = useState(0);
   const [offset, setOffset] = useState(0);
+
+  const textColor = getTextColorFromBackgroundColor(task.color);
 
   useEffect(() => {
     // Get day count
@@ -46,8 +49,8 @@ const TaskItem: React.FC<TaskItemProps> = ({
         role="button"
         tabIndex={tabIndex}
       >
-        <strong className="text-sm text-gray-800 whitespace-nowrap overflow-hidden overflow-ellipsis">{task.name}</strong>
-        <span className="text-xs text-gray-700 whitespace-nowrap overflow-hidden overflow-ellipsis">
+        <strong className={`text-sm whitespace-nowrap overflow-hidden overflow-ellipsis ${textColor === 'black' ? 'text-gray-800' : 'text-gray-200'}`}>{task.name}</strong>
+        <span className={`text-xs whitespace-nowrap overflow-hidden overflow-ellipsis ${textColor === 'black' ? 'text-gray-700' : 'text-gray-300'}`}>
           {`${task.start.toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' })} - 
           ${task.end.toLocaleDateString(undefined, { month: '2-digit', day: '2-digit' })}`}
         </span>

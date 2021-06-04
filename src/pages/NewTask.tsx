@@ -19,21 +19,23 @@ import { Task, useProject } from '../contexts/project';
 // Styles
 import '../styles/pages/Create.css';
 import 'emoji-mart/css/emoji-mart.css';
+import getTextColorFromBackgroundColor from '../utils/getTextColorFromBackgroundColor';
 
 function NewTask() {
+  const { id: project_id } = useParams<{ id: string }>();
   const defaultDate = new Date(new Date().setHours(0, 0, 0, 0));
+
   const [colorModalIsOpen, setColorModalIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [color, setColor] = useState('#00bcd4');
   const [start, setStart] = useState(defaultDate);
   const [end, setEnd] = useState(defaultDate);
-  const { id: project_id } = useParams<{ id: string }>();
 
+  const history = useHistory();
+  const { task_id } = useParams<{ task_id?: string }>();
   const {
     getTaskData, addNewTask, editTask, removeTask,
   } = useProject();
-  const { task_id } = useParams<{ task_id?: string }>();
-  const history = useHistory();
 
   useEffect(() => {
     async function setTaskData(id: string) {
@@ -79,16 +81,22 @@ function NewTask() {
       if (result.isConfirmed) {
         if (task_id) {
           const taskData = await getTaskData(task_id);
-
           await removeTask(taskData);
+
           history.push(`/project/${project_id}`);
         }
 
-        Swal.fire(
-          'Deleted!',
-          'Task deleted from project',
-          'success',
-        );
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Task deleted from project',
+          icon: 'success',
+        });
+      } else {
+        Swal.fire({
+          title: 'Oopps...',
+          text: 'We had an error deleting this task',
+          icon: 'error',
+        });
       }
     });
   }
@@ -132,7 +140,7 @@ function NewTask() {
                   style={{ backgroundColor: color }}
                   onClick={toggleColorModal}
                 >
-                  <VscSymbolColor className="text-gray-200 text-3xl" />
+                  <VscSymbolColor className={`text-3xl ${getTextColorFromBackgroundColor(color) === 'black' ? 'text-gray-800' : 'text-gray-200'}`} />
                 </button>
                 {colorModalIsOpen && (
                   <Modal
