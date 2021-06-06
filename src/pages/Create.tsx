@@ -32,19 +32,27 @@ function Create() {
 
     const form = event.currentTarget;
     const formData = getFormInputValues(form);
+    let project_id = '';
 
     const projectsCollection = database.collections.get<ProjectModel>('projects');
 
     await database.action(async () => {
-      await projectsCollection.create((project) => {
+      const createdProject = await projectsCollection.create((project) => {
         project.title = formData.title;
         project.subtitle = formData.subtitle;
         project.emoji = formData.emoji;
       });
+
+      project_id = createdProject.id;
     });
 
     form.reset();
-    history.push('/');
+
+    if (project_id !== '') {
+      history.push(`/project/${project_id}`);
+    } else {
+      history.push('/');
+    }
   }
 
   return (
