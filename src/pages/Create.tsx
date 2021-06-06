@@ -19,6 +19,7 @@ import ProjectModel from '../models/Project';
 // Styles
 import '../styles/pages/Create.css';
 import 'emoji-mart/css/emoji-mart.css';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 function Create() {
   const [selectedEmoji, setSelectedEmoji] = useState<string>('🚀');
@@ -26,8 +27,10 @@ function Create() {
 
   const history = useHistory();
   const { database } = useDatabase();
+  const { darkTheme } = useDarkTheme();
 
   async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
+    console.log('oi');
     event.preventDefault();
 
     const form = event.currentTarget;
@@ -81,8 +84,10 @@ function Create() {
                     setEmojiMenuIsOpen(false);
                   }}
                   showPreview={false}
+                  autoFocus={false}
+                  theme={darkTheme ? 'dark' : 'light'}
                 />
-                <input type="hidden" id="emoji" name="emoji" placeholder="Ex: Rocket" value={selectedEmoji} required />
+                <input type="hidden" id="emoji" name="emoji" placeholder="Ex: Rocket" value={selectedEmoji} />
               </div>
               <h1 className="text-4xl font-semibold text-gray-700 dark:text-gray-300">Create new Project</h1>
             </div>
@@ -91,6 +96,7 @@ function Create() {
               name="title"
               placeholder="Ex: Rocket"
               label="Title"
+              autoComplete="off"
               required
             />
             <InputField
@@ -98,6 +104,7 @@ function Create() {
               name="subtitle"
               placeholder="Ex: Send rockets to mars"
               label="Subtitle"
+              autoComplete="off"
               required
             />
           </div>
