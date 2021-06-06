@@ -16,6 +16,7 @@ import { useProject } from '../contexts/project';
 // Styles
 import '../styles/pages/Project.css';
 import Button from '../components/form/Button';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 function Project() {
   const [daySize, setDaySize] = useState(1.2);
@@ -26,6 +27,7 @@ function Project() {
   const [projectDescription, setProjectDescription] = useState('');
 
   const { id: project_id } = useParams<{ id: string }>();
+  const { darkTheme } = useDarkTheme();
 
   const {
     project, getAndSetProjectDataFromId, editProject, tasks,
@@ -140,6 +142,7 @@ function Project() {
                 setEmojiMenuIsOpen(false);
               }}
               showPreview={false}
+              theme={darkTheme ? 'dark' : 'light'}
             />
           </div>
           <div className="flex flex-row">
