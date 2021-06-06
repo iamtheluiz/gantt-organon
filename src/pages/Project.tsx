@@ -27,7 +27,9 @@ function Project() {
 
   const { id: project_id } = useParams<{ id: string }>();
 
-  const { project, getAndSetProjectDataFromId, editProject } = useProject();
+  const {
+    project, getAndSetProjectDataFromId, editProject, tasks,
+  } = useProject();
   const history = useHistory();
 
   useEffect(() => {
@@ -170,10 +172,12 @@ function Project() {
 
           <header className="flex flex-row-reverse">
             <div className="flex flex-row gap-2">
-              <Button className="max-w-max" type="button" onClick={handleExportDiagram} primary>
-                <FiDownload color="#fff" size={18} />
-                <span className="text-sm ml-1 text-white">Export</span>
-              </Button>
+              {tasks.length > 0 && (
+                <Button className="max-w-max" type="button" onClick={handleExportDiagram} primary>
+                  <FiDownload color="#fff" size={18} />
+                  <span className="text-sm ml-1 text-white">Export</span>
+                </Button>
+              )}
               <Button className="max-w-max" type="button" onClick={handleNavigateToNewTask} primary>
                 <FiPlus color="#fff" size={18} />
                 <span className="text-sm ml-1 text-white">Add Task</span>
