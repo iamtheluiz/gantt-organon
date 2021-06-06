@@ -158,7 +158,10 @@ function NewTask() {
               <div className="flex flex-1">
                 <TaskItem
                   task={{
-                    name: title || 'Planning', start, end, color,
+                    name: title || 'Planning',
+                    start,
+                    end,
+                    color,
                   }}
                   tabIndex={-1}
                   daySize={0}
@@ -199,22 +202,24 @@ function NewTask() {
           </div>
           <footer className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {!task_id ? (
-              <Button className="text-gray-800 dark:text-gray-600" type="reset" style={{ backgroundColor: '#dde9f3' }}>
-                Clear
-              </Button>
+              <>
+                <Button className="text-gray-800 dark:text-gray-600" type="reset" style={{ backgroundColor: '#dde9f3' }}>
+                  Clear
+                </Button>
+                <Button className="text-white" type="submit" primary>
+                  Create
+                </Button>
+              </>
             ) : (
-              <Button
-                className="bg-red-500 text-white"
-                type="button"
-                onClick={handleRemoveTask}
-              >
-                Remove
-              </Button>
+              <>
+                <Button className="bg-red-500 text-white" type="button" onClick={handleRemoveTask}>
+                  Remove
+                </Button>
+                <Button className="text-white" type="submit" primary>
+                  Save
+                </Button>
+              </>
             )}
-
-            <Button className="text-white" type="submit" primary>
-              {!task_id ? 'Create' : 'Save'}
-            </Button>
           </footer>
         </form>
       </section>

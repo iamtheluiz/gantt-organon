@@ -1,16 +1,14 @@
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import Settings from './Settings';
 
-import { useDatabase } from '../contexts/database';
-import ProjectModel from '../models/Project';
+import { useProject } from '../contexts/project';
 
 function ProjectSettings() {
-  const { id: project_id } = useParams<{ id: string}>();
   const history = useHistory();
 
-  const { database } = useDatabase();
+  const { project, deleteProject } = useProject();
 
   async function handleDeleteProject() {
     Swal.fire({
@@ -21,23 +19,21 @@ function ProjectSettings() {
       confirmButtonText: 'Yes, delete it!',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const projectData = await database.get<ProjectModel>('projects').find(project_id);
-        const projectTasks = await projectData.tasks.fetch();
+        if (deleteProject(project)) {
+          Swal.fire(
+            'Deleted!',
+            'Project delete successfully!',
+            'success',
+          );
 
-        await database.action(async () => {
-          await projectData.destroyPermanently();
-          projectTasks.map(async (task: any) => {
-            await task.destroyPermanently();
-          });
-        });
-
-        Swal.fire(
-          'Deleted!',
-          'Project delete successfully!',
-          'success',
-        );
-
-        history.push('/');
+          history.push('/');
+        } else {
+          Swal.fire(
+            'Error!',
+            'Sorry, an error ocurred...',
+            'error',
+          );
+        }
       }
     });
   }
