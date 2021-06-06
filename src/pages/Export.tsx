@@ -1,16 +1,26 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { FiDownload } from 'react-icons/fi';
 import Swal from 'sweetalert2';
-
 import html2canvas from 'html2canvas';
+import { useHistory } from 'react-router-dom';
 
-import TaskTimeline from '../components/TaskTimeline';
+// Contexts
 import { useProject } from '../contexts/project';
+
+// Components
+import TaskTimeline from '../components/TaskTimeline';
 import Header from '../components/Header';
 
 function Export() {
   const timelineRef = useRef<HTMLDivElement>(null);
   const { project } = useProject();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!project.title) {
+      history.push('/');
+    }
+  }, []);
 
   async function createDiagramImage() {
     if (timelineRef.current) {
