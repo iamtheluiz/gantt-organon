@@ -20,6 +20,7 @@ import { Task, useProject } from '../contexts/project';
 import '../styles/pages/Create.css';
 import 'emoji-mart/css/emoji-mart.css';
 import getTextColorFromBackgroundColor from '../utils/getTextColorFromBackgroundColor';
+import Button from '../components/form/Button';
 
 function NewTask() {
   const { id: project_id } = useParams<{ id: string }>();
@@ -198,26 +199,22 @@ function NewTask() {
           </div>
           <footer className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {!task_id ? (
-              <button
-                className="button text-gray-800 dark:text-gray-600"
-                type="reset"
-                style={{ backgroundColor: '#dde9f3' }}
-              >
+              <Button className="text-gray-800 dark:text-gray-600" type="reset" style={{ backgroundColor: '#dde9f3' }}>
                 Clear
-              </button>
+              </Button>
             ) : (
-              <button
-                className="button bg-red-500 text-white"
+              <Button
+                className="bg-red-500 text-white"
                 type="button"
                 onClick={handleRemoveTask}
               >
                 Remove
-              </button>
+              </Button>
             )}
 
-            <button className="button primary text-white" type="submit">
+            <Button className="text-white" type="submit" primary>
               {!task_id ? 'Create' : 'Save'}
-            </button>
+            </Button>
           </footer>
         </form>
       </section>

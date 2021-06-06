@@ -48,7 +48,7 @@ function ProjectSettings() {
         className="w-full flex justify-center items-center bg-red-500 py-3 rounded-md transition-all hover:opacity-80"
         onClick={handleDeleteProject}
       >
-        <span className="text-base text-gray-300">Delete Project</span>
+        <span className="text-base text-gray-100">Delete Project</span>
       </button>
     </Settings>
   );

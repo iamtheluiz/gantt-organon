@@ -4,6 +4,7 @@ import { Picker } from 'emoji-mart';
 
 // Components
 import InputField from '../components/form/InputField';
+import Button from '../components/form/Button';
 import SimpleHeader from '../components/SimpleHeader';
 
 // Utilities
@@ -59,7 +60,10 @@ function Create() {
                 </button>
                 <Picker
                   style={{
-                    position: 'absolute', top: '0px', left: '40px', display: emojiMenuIsOpen ? 'initial' : 'none',
+                    position: 'absolute',
+                    top: '0px',
+                    left: '40px',
+                    display: emojiMenuIsOpen ? 'initial' : 'none',
                   }}
                   title=""
                   native
@@ -90,14 +94,10 @@ function Create() {
             />
           </div>
           <footer className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <button
-              className="button text-gray-800 dark:text-gray-600"
-              type="reset"
-              style={{ backgroundColor: '#dde9f3' }}
-            >
+            <Button className="text-gray-800 dark:text-gray-600" type="reset" style={{ backgroundColor: '#dde9f3' }}>
               Clear
-            </button>
-            <button className="button primary text-white" type="submit">Create</button>
+            </Button>
+            <Button className="text-white" type="submit" primary>Create</Button>
           </footer>
         </form>
       </section>

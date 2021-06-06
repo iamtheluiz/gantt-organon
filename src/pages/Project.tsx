@@ -11,6 +11,7 @@ import { useProject } from '../contexts/project';
 
 // Styles
 import '../styles/pages/Project.css';
+import Button from '../components/form/Button';
 
 function Project() {
   const [daySize, setDaySize] = useState(1.2);
@@ -64,14 +65,14 @@ function Project() {
 
           <header className="flex flex-row-reverse">
             <div className="flex flex-row gap-2">
-              <button className="button primary max-w-max flex justify-center items-center shadow-md" onClick={handleExportDiagram}>
+              <Button className="max-w-max" type="button" onClick={handleExportDiagram} primary>
                 <FiDownload color="#fff" size={18} />
                 <span className="text-sm ml-1 text-white">Export</span>
-              </button>
-              <button className="button primary max-w-max flex justify-center items-center shadow-md" onClick={handleNavigateToNewTask}>
+              </Button>
+              <Button className="max-w-max" type="button" onClick={handleNavigateToNewTask} primary>
                 <FiPlus color="#fff" size={18} />
                 <span className="text-sm ml-1 text-white">Add Task</span>
-              </button>
+              </Button>
             </div>
           </header>
 
