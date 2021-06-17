@@ -8,20 +8,21 @@ interface useDarkThemeProps {
 
 const useDarkTheme = (): useDarkThemeProps => {
   const [darkTheme, setDarkTheme] = useState(false);
+  const themeKey = '@iamtheluiz-gantt-organon/theme';
 
   useEffect(() => {
-    const localStorageValue = localStorage.getItem('@iamtheluiz-gantt-organon/theme') || null;
+    const localStorageValue = localStorage.getItem(themeKey) || null;
     const storedTheme: boolean | null = localStorageValue ? JSON.parse(localStorageValue) : null;
 
     if (storedTheme) {
       setDarkTheme(storedTheme);
     } else {
-      localStorage.setItem('@iamtheluiz-gantt-organon/theme', JSON.stringify(darkTheme));
+      localStorage.setItem(themeKey, JSON.stringify(darkTheme));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('@iamtheluiz-gantt-organon/theme', JSON.stringify(darkTheme));
+    localStorage.setItem(themeKey, JSON.stringify(darkTheme));
     document.body.setAttribute('class', darkTheme ? 'dark' : '');
   }, [darkTheme]);
 

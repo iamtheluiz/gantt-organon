@@ -76,7 +76,8 @@ function Project() {
 
       return;
     }
-    const updateSuccess = editProject({
+
+    const updateSuccess = await editProject({
       ...project,
       title: projectTitle,
       subtitle: projectDescription,

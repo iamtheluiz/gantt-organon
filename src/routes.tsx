@@ -9,7 +9,7 @@ import Project from './pages/Project';
 import Settings from './pages/Settings';
 import ProjectSettings from './pages/ProjectSettings';
 import Export from './pages/Export';
-import NewTask from './pages/NewTask';
+import NewTask from './pages/Task';
 
 function Routes() {
   // Load theme

@@ -12,6 +12,7 @@ import SimpleHeader from '../components/SimpleHeader';
 import SimpleActionButton from '../components/SimpleActionButton';
 import Modal from '../components/Modal';
 import TaskItem from '../components/TaskItem';
+import Button from '../components/form/Button';
 
 // Contexts
 import { Task, useProject } from '../contexts/project';
@@ -19,10 +20,11 @@ import { Task, useProject } from '../contexts/project';
 // Styles
 import '../styles/pages/Create.css';
 import 'emoji-mart/css/emoji-mart.css';
-import getTextColorFromBackgroundColor from '../utils/getTextColorFromBackgroundColor';
-import Button from '../components/form/Button';
 
-function NewTask() {
+// Utils
+import getTextColorFromBackgroundColor from '../utils/getTextColorFromBackgroundColor';
+
+function TaskPage() {
   const { id: project_id } = useParams<{ id: string }>();
   const defaultDate = new Date(new Date().setHours(0, 0, 0, 0));
 
@@ -227,4 +229,4 @@ function NewTask() {
   );
 }
 
-export default NewTask;
+export default TaskPage;
