@@ -1,7 +1,7 @@
 import { HashRouter } from 'react-router-dom';
 import useDarkTheme from './hooks/useDarkTheme';
 
-import { AnimatedRoutes, RouteTransition } from './components/AnimatedRoutes';
+import { AnimatedRoutes, RouteTransition } from './components/animated/AnimatedRoutes';
 
 import Home from './pages/Home';
 import Create from './pages/Create';

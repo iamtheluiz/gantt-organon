@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../styles/components/Modal.css';
-import OpenIn from './OpenIn';
+import OpenIn from './animated/OpenIn';
 
 interface ModalProps {
   modalIsOpen: boolean;
