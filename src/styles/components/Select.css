@@ -1,0 +1,23 @@
+.select-container.active .select-button {
+  border-color: var(--primary-purple);
+  outline: none;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  color: var(--primary-purple);
+  transition: all 0.1s;
+}
+.select-container .select-button svg {
+  transition: all 0.1s;
+}
+.select-container.active .select-button svg {
+  transform: rotateX(180deg);
+}
+.select-container.active .select-options {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-color: var(--primary-purple);
+}
+
+.select-container .select-option:hover {
+  background-color: var(--primary-purple);
+}

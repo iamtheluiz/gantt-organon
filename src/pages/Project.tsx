@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Picker } from 'emoji-mart';
 import {
-  FiDownload, FiPlus, FiCheck, FiX,
+  FiDownload, FiPlus, FiCheck, FiX, FiZoomIn,
 } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 
@@ -17,6 +17,7 @@ import { useProject } from '../contexts/project';
 import '../styles/pages/Project.css';
 import Button from '../components/form/Button';
 import useDarkTheme from '../hooks/useDarkTheme';
+import Select from '../components/form/Select';
 
 function Project() {
   const [daySize, setDaySize] = useState(1.2);
@@ -147,27 +148,31 @@ function Project() {
             />
           </div>
           <div className="flex flex-row">
-            <div className="ml-2 flex flex-col justify-center">
-              <input
-                type="text"
-                className="font-serif text-base dark:text-gray-300 bg-transparent"
-                value={projectTitle}
-                maxLength={22}
-                minLength={2}
-                onChange={(event) => setProjectTitle(event.currentTarget.value)}
-              />
-              <input
-                type="text"
-                className="text-sm font-light dark:text-gray-300 bg-transparent"
-                value={projectDescription}
-                onChange={(event) => setProjectDescription(event.currentTarget.value)}
-              />
-            </div>
-            {showUpdateConfirmationButton && (
-              <div className="flex flex-row justify-center items-center">
-                <FiCheck className="text-green-600 text-2xl cursor-pointer" onClick={submitProjectDataUpdate} />
-                <FiX className="text-red-600 text-2xl cursor-pointer" onClick={cancelProjectDataUpdate} />
-              </div>
+            {projectTitle && (
+              <>
+                <div className="ml-2 flex flex-col justify-center">
+                  <input
+                    type="text"
+                    className="font-serif text-base dark:text-gray-300 bg-transparent"
+                    value={projectTitle}
+                    maxLength={22}
+                    minLength={2}
+                    onChange={(event) => setProjectTitle(event.currentTarget.value)}
+                  />
+                  <input
+                    type="text"
+                    className="text-sm font-light dark:text-gray-300 bg-transparent"
+                    value={projectDescription}
+                    onChange={(event) => setProjectDescription(event.currentTarget.value)}
+                  />
+                </div>
+                {showUpdateConfirmationButton && (
+                <div className="flex flex-row justify-center items-center">
+                  <FiCheck className="text-green-600 text-2xl cursor-pointer" onClick={submitProjectDataUpdate} />
+                  <FiX className="text-red-600 text-2xl cursor-pointer" onClick={cancelProjectDataUpdate} />
+                </div>
+                )}
+              </>
             )}
           </div>
         </Header>
@@ -189,14 +194,21 @@ function Project() {
             </div>
           </header>
 
-          <div className="w-full flex flex-row-reverse pt-4">
-            <select value={daySize} onChange={(event) => setDaySize(Number(event.currentTarget.value))}>
-              <option value={0.8}>80%</option>
-              <option value={0.9}>90%</option>
-              <option value={1}>100%</option>
-              <option value={1.1}>110%</option>
-              <option value={1.2}>120%</option>
-            </select>
+          <div className="w-full flex flex-row-reverse items-center pt-4">
+            <div className="w-36">
+              <Select
+                value={daySize}
+                setValue={setDaySize}
+                options={{
+                  '80%': 0.8,
+                  '90%': 0.9,
+                  '100%': 1,
+                  '110%': 1.1,
+                  '120%': 1.2,
+                }}
+              />
+            </div>
+            <FiZoomIn className="text-2xl mx-2" />
           </div>
           <TaskTimeline container="scroll" daySize={daySize} />
         </main>
