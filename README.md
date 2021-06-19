@@ -43,7 +43,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 </p>
 
 <p align="center">
-  <img src="docs/screenshots/export.png" alt="Project Page" />
+  <img src="docs/screenshots/project.png" alt="Project Page" />
   <span>Project Page</span>
 </p>
 
