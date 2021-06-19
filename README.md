@@ -1,46 +1,105 @@
-# Getting Started with Create React App
+# 📅 Gantt Organon
+
+Gantt Organon is a website that helps you creating a schedule and export it as a image.
+
+<p align="center">
+  <img src="docs/screenshots/project.png" alt="Project Interface" />
+  <span>Project Interface</span>
+</p>
+
+<p align="center">
+  <img alt="Typescript" src="https://img.shields.io/badge/-Typescript-44475a?logo=typescript&logoColor=white" />
+  <img alt="React" src="https://img.shields.io/badge/-React-44475a?logo=react&logoColor=white" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/-Tailwind CSS-44475a?logo=tailwindcss&logoColor=white" />
+  <img alt="ESLint" src="https://img.shields.io/badge/-ESLint-44475a?logo=eslint&logoColor=white" />
+</p>
+
+## 📂 Boilerplate
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## 💻 Technologies
+
+* [Node](https://nodejs.org/en/)
+* [React](https://reactjs.org/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [WatermelonDB](https://nozbe.github.io/WatermelonDB/)
+* [ESLint](https://eslint.org/)
+
+## 📸 Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/home.png" alt="Home Page" />
+  <span>Home Page</span>
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/new_project.png" alt="Create New Project" />
+  <span>Create New Project</span>
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/export.png" alt="Project Page" />
+  <span>Project Page</span>
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/export.png" alt="Export Page" />
+  <span>Export Page</span>
+</p>
+
+## 🏃 Getting Started
+
+First, clone this repository and access the created folder:
+
+```bash
+# Cloning repository
+git clone https://github.com/iamtheluiz/gantt-organon.git
+
+cd gantt-organon/
+```
+
+Inside the folder, install all project dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+## 👨🏽‍💻 Usage
+
+To run this project in a local environment use:
+
+```bash
+npm run start
+# or
+yarn start
+```
+
+Then open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## ⚙️ Build
+
+To build this project, run:
+
+```bash
+yarn build
+```
+
+Await the script and you will have a folder "/build" in your project root with all generated static files.
+
+## 💼 Authors
+
+* **Luiz Gustavo** - *Development* - [iamtheluiz](https://github.com/iamtheluiz)
+  * Website: https://iamtheluiz.github.io
+  * Github: [@iamtheluiz](https://github.com/iamtheluiz)
+  * LinkedIn: [Luiz Gustavo da Silva Vasconcellos](https://www.linkedin.com/in/luiz-gustavo-da-silva-vasconcellos-05192a192?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BbQkVQ3sTTv6XCn%2FiToGGcA%3D%3D)
+
+## 📃 License
+
+This project is under the MIT License - see the [LICENSE](LICENSE) file for details.
