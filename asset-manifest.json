@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/gantt-organon/static/css/main.212da7d6.chunk.css",
+    "main.js": "/gantt-organon/static/js/main.98bcf47a.chunk.js",
+    "main.js.map": "/gantt-organon/static/js/main.98bcf47a.chunk.js.map",
+    "runtime-main.js": "/gantt-organon/static/js/runtime-main.47b21e43.js",
+    "runtime-main.js.map": "/gantt-organon/static/js/runtime-main.47b21e43.js.map",
+    "static/css/2.3124cb67.chunk.css": "/gantt-organon/static/css/2.3124cb67.chunk.css",
+    "static/js/2.e097734a.chunk.js": "/gantt-organon/static/js/2.e097734a.chunk.js",
+    "static/js/2.e097734a.chunk.js.map": "/gantt-organon/static/js/2.e097734a.chunk.js.map",
+    "static/js/3.7fe3a352.chunk.js": "/gantt-organon/static/js/3.7fe3a352.chunk.js",
+    "static/js/3.7fe3a352.chunk.js.map": "/gantt-organon/static/js/3.7fe3a352.chunk.js.map",
+    "index.html": "/gantt-organon/index.html",
+    "static/css/2.3124cb67.chunk.css.map": "/gantt-organon/static/css/2.3124cb67.chunk.css.map",
+    "static/css/main.212da7d6.chunk.css.map": "/gantt-organon/static/css/main.212da7d6.chunk.css.map",
+    "static/js/2.e097734a.chunk.js.LICENSE.txt": "/gantt-organon/static/js/2.e097734a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.47b21e43.js",
+    "static/css/2.3124cb67.chunk.css",
+    "static/js/2.e097734a.chunk.js",
+    "static/css/main.212da7d6.chunk.css",
+    "static/js/main.98bcf47a.chunk.js"
+  ]
+}
