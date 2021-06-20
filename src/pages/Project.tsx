@@ -208,7 +208,7 @@ function Project() {
                 }}
               />
             </div>
-            <FiZoomIn className="text-2xl mx-2" />
+            <FiZoomIn className="text-2xl mx-2 dark:text-gray-300" />
           </div>
           <TaskTimeline container="scroll" daySize={daySize} />
         </main>
