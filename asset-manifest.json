@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/gantt-organon/static/css/main.212da7d6.chunk.css",
-    "main.js": "/gantt-organon/static/js/main.9677a25a.chunk.js",
-    "main.js.map": "/gantt-organon/static/js/main.9677a25a.chunk.js.map",
+    "main.js": "/gantt-organon/static/js/main.d4eea875.chunk.js",
+    "main.js.map": "/gantt-organon/static/js/main.d4eea875.chunk.js.map",
     "runtime-main.js": "/gantt-organon/static/js/runtime-main.47b21e43.js",
     "runtime-main.js.map": "/gantt-organon/static/js/runtime-main.47b21e43.js.map",
     "static/css/2.3124cb67.chunk.css": "/gantt-organon/static/css/2.3124cb67.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.3124cb67.chunk.css",
     "static/js/2.58bd1289.chunk.js",
     "static/css/main.212da7d6.chunk.css",
-    "static/js/main.9677a25a.chunk.js"
+    "static/js/main.d4eea875.chunk.js"
   ]
 }
