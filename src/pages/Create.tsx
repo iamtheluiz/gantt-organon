@@ -30,7 +30,6 @@ function Create() {
   const { darkTheme } = useDarkTheme();
 
   async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
-    console.log('oi');
     event.preventDefault();
 
     const form = event.currentTarget;
